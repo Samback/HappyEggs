@@ -14,12 +14,16 @@
 
 #define  RADIUS 15
 
-@interface HEggHomePageVC ()<NSFetchedResultsControllerDelegate, FDTakeDelegate>
+@interface HEggHomePageVC ()<NSFetchedResultsControllerDelegate, FDTakeDelegate, UIAlertViewDelegate>
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (weak, nonatomic) IBOutlet UICollectionView *eggsList;
 @property (nonatomic, strong) REActivityViewController *activityViewController;
 @property (nonatomic) NSInteger numberOfUniqeEggs;
 @property (nonatomic, strong) FDTakeController *takeController;
+@property (nonatomic, strong) UIAlertView *deleteEggAlert;
+@property (nonatomic, strong) Egg *selectedEgg;
+@property (weak, nonatomic) IBOutlet UIImageView *eggSkinImage;
+@property (nonatomic, strong) Egg *eggOnScreen;
 @end
 
 @implementation HEggHomePageVC
@@ -68,9 +72,15 @@
                                                        [NSBundle bundleWithIdentifier:@"FDTakeTranslations"],
                                                        @"There are no sources available to select a photo");
     NSLog(@"%@", str);
+    self.eggOnScreen = [self.fetchedResultsController fetchedObjects][1];
 
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.eggSkinImage.image = [UIImage imageNamed:self.eggOnScreen.background];
+}
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -134,7 +144,7 @@
     }
     else
     {
-        [self chooseNewSkinForEgg];
+        [self chooseNewSkinForEgg:egg];
     }
 
 }
@@ -146,12 +156,6 @@
     [self.takeController takePhotoOrChooseFromLibrary];
 }
 
-
-
-- (IBAction)takePhotoOrChooseFromLibrary
-{
-
-}
 
 #pragma mark - FDTakeDelegate
 
@@ -167,36 +171,58 @@
 
 - (void)takeController:(FDTakeController *)controller gotPhoto:(UIImage *)photo withInfo:(NSDictionary *)info
 {
-     NSManagedObjectContext *context = [RKManagedObjectStore defaultStore].mainQueueManagedObjectContext;
+    NSManagedObjectContext *context = [RKManagedObjectStore defaultStore].mainQueueManagedObjectContext;
     NSLog(@"geted image %@", photo);
     NSInteger eggId = self.numberOfUniqeEggs;
     [Egg addEggWithName:[NSString stringWithFormat:@"Image name %d", eggId] background:@"1.jpg" couldDelete:YES eggId:eggId type:USER_EGG_TYPE andContext:context];
 }
 
 
-- (void)chooseNewSkinForEgg
+- (void)chooseNewSkinForEgg:(Egg *)newEgg
 {
     NSLog(@"reskin");
+    self.eggOnScreen = newEgg;
+    self.eggSkinImage.image = [UIImage imageNamed:self.eggOnScreen.background];
 }
 
 - (void)deleteEggAtIndex:(NSIndexPath *)indexPath
 {
+    if (self.deleteEggAlert) {
+        return;
+    }
     NSLog(@"Try to delete %@", indexPath);
     NSIndexPath *fakePosition = [NSIndexPath indexPathForItem:indexPath.item % self.numberOfUniqeEggs inSection:0];
     Egg *egg = [self.fetchedResultsController objectAtIndexPath:fakePosition];
     HEggCell *eggCell = (HEggCell *)[self.eggsList cellForItemAtIndexPath:indexPath];
     if ([egg.type isEqualToString:USER_EGG_TYPE]) {
         [eggCell startJiggling];
-//        [[RKObjectManager sharedManager].managedObjectStore.mainQueueManagedObjectContext deleteObject:egg];
-//        NSError *error = nil;
-//        [[RKObjectManager sharedManager].managedObjectStore.mainQueueManagedObjectContext saveToPersistentStore:&error];
-//        if (error) {
-//            NSLog(@"Some problems on saving at favorites");
-//        }
-
+        
+        self.deleteEggAlert = [[UIAlertView alloc] initWithTitle:APP_NAME message:DELETE_EGG_MESSAGE delegate:self cancelButtonTitle:NO_MESSAGE otherButtonTitles:YES_MESSAGE, nil];
+        self.selectedEgg = egg;
+        [self.deleteEggAlert show];
     }
+    
 }
 
+
+
+- (void)deleteEgg
+{
+    if ([self.selectedEgg isEqual:self.eggOnScreen]) {
+        NSInteger position = [[self.fetchedResultsController fetchedObjects] indexOfObject:self.selectedEgg];
+        self.eggOnScreen = [self.fetchedResultsController fetchedObjects][position -1];
+    }
+    [self stopJigglingOnCollection];
+    [[RKObjectManager sharedManager].managedObjectStore.mainQueueManagedObjectContext deleteObject:self.selectedEgg];
+    NSError *error = nil;
+    [[RKObjectManager sharedManager].managedObjectStore.mainQueueManagedObjectContext saveToPersistentStore:&error];
+    if (error) {
+        NSLog(@"Some problems on saving at favorites");
+    }    
+    self.selectedEgg = nil;
+    self.deleteEggAlert = nil;
+    [self chooseNewSkinForEgg: self.eggOnScreen];
+}
 
 - (IBAction)longPressForDelete:(UILongPressGestureRecognizer *)sender {
     CGPoint location = [sender locationInView:self.eggsList]; 
@@ -207,6 +233,37 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller{
     [self.eggsList reloadData];
+}
+
+
+
+#pragma mark - Sharing metods
+
+- (IBAction)shareWithFriends:(UIBarButtonItem *)sender {
+    [self.activityViewController presentFromRootViewController];
+}
+
+
+#pragma mark - UIAlertView Delegate methods
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ([alertView isEqual:self.deleteEggAlert]) {
+        if (buttonIndex == 0) {
+            [self stopJigglingOnCollection];
+            self.deleteEggAlert = nil;
+            
+        }
+        else {
+            [self stopJigglingOnCollection];
+            [self deleteEgg];
+        }
+    }
+}
+
+- (void)stopJigglingOnCollection
+{
+[self.eggsList.visibleCells makeObjectsPerformSelector:@selector(stopJiggling)];
 }
 
 
@@ -251,7 +308,7 @@
 - (void)sendBumpData{
     NSDictionary *dictionary = @{
                                  @"attack":@"0",
-                                };
+                                 };
     
     
     
@@ -281,14 +338,6 @@
         }
     }];
 }
-
-
-#pragma mark - Sharing metods
-
-- (IBAction)shareWithFriends:(UIBarButtonItem *)sender {
-    [self.activityViewController presentFromRootViewController];
-}
-
 
 
 

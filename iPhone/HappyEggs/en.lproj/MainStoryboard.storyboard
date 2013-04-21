@@ -15,11 +15,20 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TsF-5e-Gbw">
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N90-gj-NqQ">
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RJw-E8-jN9"/>
+                                        </subviews>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="RJw-E8-jN9" firstAttribute="bottom" secondItem="N90-gj-NqQ" secondAttribute="bottom" type="default" id="Ojr-oP-5c2"/>
+                                            <constraint firstItem="RJw-E8-jN9" firstAttribute="top" secondItem="N90-gj-NqQ" secondAttribute="top" type="default" id="Zgb-R7-Moq"/>
+                                            <constraint firstItem="RJw-E8-jN9" firstAttribute="leading" secondItem="N90-gj-NqQ" secondAttribute="leading" type="default" id="gc6-Q1-9jB"/>
+                                            <constraint firstItem="RJw-E8-jN9" firstAttribute="trailing" secondItem="N90-gj-NqQ" secondAttribute="trailing" type="default" id="q8A-YE-4Wz"/>
+                                        </constraints>
                                     </view>
                                     <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pTn-qv-eRH">
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="120" id="52x-0b-THm"/>
+                                            <constraint firstAttribute="height" constant="120" type="user" id="52x-0b-THm"/>
                                         </constraints>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cIe-Fn-ILF">
                                             <size key="itemSize" width="80" height="100"/>
@@ -78,13 +87,13 @@
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="N90-gj-NqQ" secondAttribute="bottom" constant="122" id="5PB-A1-XTD"/>
+                                    <constraint firstAttribute="bottom" secondItem="pTn-qv-eRH" secondAttribute="bottom" constant="2" id="8X9-j1-kOm"/>
                                     <constraint firstItem="N90-gj-NqQ" firstAttribute="top" secondItem="TsF-5e-Gbw" secondAttribute="top" type="default" id="IuK-t7-lUb"/>
                                     <constraint firstItem="pTn-qv-eRH" firstAttribute="trailing" secondItem="TsF-5e-Gbw" secondAttribute="trailing" type="default" id="LPu-0r-dN4"/>
+                                    <constraint firstItem="pTn-qv-eRH" firstAttribute="top" secondItem="N90-gj-NqQ" secondAttribute="bottom" type="user" id="UsE-hP-qLg"/>
                                     <constraint firstItem="pTn-qv-eRH" firstAttribute="leading" secondItem="TsF-5e-Gbw" secondAttribute="leading" type="default" id="WQB-JD-XUd"/>
                                     <constraint firstItem="N90-gj-NqQ" firstAttribute="leading" secondItem="TsF-5e-Gbw" secondAttribute="leading" type="default" id="Xql-Ye-TNM"/>
                                     <constraint firstItem="N90-gj-NqQ" firstAttribute="trailing" secondItem="TsF-5e-Gbw" secondAttribute="trailing" type="default" id="ZKl-sb-6HO"/>
-                                    <constraint firstAttribute="bottom" secondItem="pTn-qv-eRH" secondAttribute="bottom" type="user" id="beH-WI-iuP"/>
                                 </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="OWS-8q-MoV" appends="YES" id="rH6-yb-26Q"/>
@@ -108,11 +117,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="eggSkinImage" destination="RJw-E8-jN9" id="jh2-LB-A6R"/>
                         <outlet property="eggsList" destination="pTn-qv-eRH" id="Pqj-tv-kvN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y0p-6E-vNb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="OWS-8q-MoV">
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="2" id="OWS-8q-MoV">
                     <connections>
                         <action selector="longPressForDelete:" destination="ejY-Dg-1GZ" id="u4L-Tv-tKd"/>
                     </connections>
@@ -163,6 +173,7 @@
                 <relationship kind="action" name="longPressForDelete:" candidateClass="UILongPressGestureRecognizer"/>
                 <relationship kind="action" name="shareWithFriends:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="action" name="tappedCell:" candidateClass="UITapGestureRecognizer"/>
+                <relationship kind="outlet" name="eggSkinImage" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="eggsList" candidateClass="UICollectionView"/>
             </relationships>
         </class>
