@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5016B2A21724012A00A83CD8 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5016B2A01724012A00A83CD8 /* libGoogleAnalytics.a */; };
 		501B04531723A70D00F9A5AD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501B04521723A70D00F9A5AD /* UIKit.framework */; };
 		501B04551723A70D00F9A5AD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501B04541723A70D00F9A5AD /* Foundation.framework */; };
 		501B04571723A70D00F9A5AD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501B04561723A70D00F9A5AD /* CoreGraphics.framework */; };
@@ -50,6 +51,12 @@
 /* Begin PBXFileReference section */
 		377EB22FE51948FEA10C8E6A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E2C87221EE34C45A3CA97EC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		5016B29B1724012A00A83CD8 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		5016B29C1724012A00A83CD8 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		5016B29D1724012A00A83CD8 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		5016B29E1724012A00A83CD8 /* GAITransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITransaction.h; sourceTree = "<group>"; };
+		5016B29F1724012A00A83CD8 /* GAITransactionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITransactionItem.h; sourceTree = "<group>"; };
+		5016B2A01724012A00A83CD8 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
 		501B044F1723A70D00F9A5AD /* HappyEggs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyEggs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		501B04521723A70D00F9A5AD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		501B04541723A70D00F9A5AD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -128,15 +135,30 @@
 				501B04571723A70D00F9A5AD /* CoreGraphics.framework in Frameworks */,
 				75F3CF02B979483AB4CF104A /* libPods.a in Frameworks */,
 				509019711723C2E200902DEB /* libBump.a in Frameworks */,
+				5016B2A21724012A00A83CD8 /* libGoogleAnalytics.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5016B29A1724012A00A83CD8 /* GA */ = {
+			isa = PBXGroup;
+			children = (
+				5016B29B1724012A00A83CD8 /* GAI.h */,
+				5016B29C1724012A00A83CD8 /* GAITrackedViewController.h */,
+				5016B29D1724012A00A83CD8 /* GAITracker.h */,
+				5016B29E1724012A00A83CD8 /* GAITransaction.h */,
+				5016B29F1724012A00A83CD8 /* GAITransactionItem.h */,
+				5016B2A01724012A00A83CD8 /* libGoogleAnalytics.a */,
+			);
+			path = GA;
+			sourceTree = "<group>";
+		};
 		501B04461723A70D00F9A5AD = {
 			isa = PBXGroup;
 			children = (
+				5016B29A1724012A00A83CD8 /* GA */,
 				509019981723C64A00902DEB /* Controllers */,
 				509019551723AE7A00902DEB /* Helpers */,
 				5090196E1723C2E200902DEB /* libBump */,
@@ -509,6 +531,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libBump\"",
+					"\"$(SRCROOT)/GA\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -526,6 +549,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libBump\"",
+					"\"$(SRCROOT)/GA\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

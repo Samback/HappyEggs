@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HEggHomePageVC : UIViewController
+@interface HEggHomePageVC : GAITrackedViewController
 
 @end

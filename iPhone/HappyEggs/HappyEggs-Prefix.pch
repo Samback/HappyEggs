@@ -16,4 +16,6 @@
     #import "HEggDefentitions.h"
     #import "BumpClient.h"
     #import <REActivityViewController/REActivityViewController.h>
+    #import "GAI.h"
+    #import "GAITrackedViewController.h"
 #endif

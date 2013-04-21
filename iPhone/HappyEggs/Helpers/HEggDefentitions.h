@@ -11,3 +11,4 @@
 #define SHARING_TEXT NSLocalizedString(@"Мне понравилось это приложение, сыграй со мной :)", @"Text for sharing")
 
 #define GA_API_KEY @"UA-38756409-2"
+#define TIME_OF_GA_UPDATE 10

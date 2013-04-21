@@ -51,6 +51,7 @@
 {
     [super viewDidLoad];
     [self configureBump];
+    self.trackedViewName = @"Home page";
 }
 
 

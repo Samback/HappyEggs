@@ -16,6 +16,7 @@
     [self initRestKitWithCoreDataIntegration];
     [self initSourceInCoreData];
     [self initBump];
+    [self initGA];
     // Override point for customization after application launch.
     return YES;
 }
@@ -112,6 +113,20 @@
 - (void)initBump
 {
     [BumpClient configureWithAPIKey:BUMP_API_KEY andUserID:[[UIDevice currentDevice] name]];
+}
+
+#pragma mark - Init Google analytics
+
+- (void)initGA
+{
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
+    [GAI sharedInstance].dispatchInterval = TIME_OF_GA_UPDATE;
+    // Optional: set debug to YES for extra debugging information.
+    [GAI sharedInstance].debug = NO;
+    // Create tracker instance.
+    [[GAI sharedInstance] trackerWithTrackingId:GA_API_KEY];
+    
 }
 
 @end
