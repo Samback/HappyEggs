@@ -96,7 +96,7 @@
 
 - (void)fillCoreDataWithBaseEggs
 {
-    NSManagedObjectContext *context = self.managedObjectStore.mainQueueManagedObjectContext;
+    NSManagedObjectContext *context = [RKManagedObjectStore defaultStore].mainQueueManagedObjectContext;
     
     [Egg addEggWithName:@"first egg" background:@"1.jpg" couldDelete:NO eggId:1 andContext:context];
     
