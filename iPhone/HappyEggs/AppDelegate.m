@@ -15,6 +15,7 @@
 {
     [self initRestKitWithCoreDataIntegration];
     [self initSourceInCoreData];
+    [self initBump];
     // Override point for customization after application launch.
     return YES;
 }
@@ -102,9 +103,15 @@
     
     [Egg addEggWithName:@"second egg" background:@"2.jpg" couldDelete:NO eggId:2 andContext:context];
     
-    [Egg addEggWithName:@"third egg" background:@"3.jpg" couldDelete:NO eggId:3 andContext:context]; 
+    [Egg addEggWithName:@"third egg" background:@"3.jpeg" couldDelete:NO eggId:3 andContext:context];
+    [Egg addEggWithName:@"fourth egg" background:@"1.jpg" couldDelete:NO eggId:4 andContext:context];
     
 }
 
+
+- (void)initBump
+{
+    [BumpClient configureWithAPIKey:BUMP_API_KEY andUserID:[[UIDevice currentDevice] name]];
+}
 
 @end

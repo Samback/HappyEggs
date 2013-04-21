@@ -5,7 +5,7 @@
 {
     Egg *egg = [NSEntityDescription insertNewObjectForEntityForName:@"Egg" inManagedObjectContext:context];;   
     egg.name = name;
-    egg.background = name;
+    egg.background = background;
     egg.couldDelete = @(couldDelete);
     egg.eggId = @(eggId);
     NSError * error;

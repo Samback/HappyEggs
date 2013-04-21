@@ -9,6 +9,8 @@
 #import "HEggHomePageVC.h"
 #import "Egg.h"
 #import "HEggCell.h"
+#import "SBJson.h"
+
 
 @interface HEggHomePageVC ()<NSFetchedResultsControllerDelegate>
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
@@ -22,6 +24,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self configureBump];
 }
 
 
@@ -61,6 +64,7 @@
     static NSString *cellIdentifier = @"HEggCell";
     HEggCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     Egg *egg = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    NSLog(@"Egg background %@", egg.background);
     cell.eggImage.image = [UIImage imageNamed:egg.background];
     cell.contentView.backgroundColor = [UIColor redColor];
     return cell;
@@ -72,6 +76,82 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller{
     [self.eggsList reloadData];
 }
+
+
+
+#pragma mark - BUMP methods
+- (void) configureBump {
+    [self getEnemyInfo];
+    [self bumpStatus];
+    [self getBumpInfo];
+    [self sendBumpData];
+    [self catchBumpDetection];
+}
+
+- (void)getEnemyInfo{
+    [[BumpClient sharedClient] setMatchBlock:^(BumpChannelID channel) {
+        NSLog(@"Matched with user: %@", [[BumpClient sharedClient] userIDForChannel:channel]);
+        [[BumpClient sharedClient] confirmMatch:YES onChannel:channel];
+    }];
+}
+
+- (void)bumpStatus {
+    [[BumpClient sharedClient] setConnectionStateChangedBlock:^(BOOL connected) {
+        if (connected) {
+            NSLog(@"Bump connected...");
+        } else {
+            NSLog(@"Bump disconnected...");
+        }
+    }];
+}
+- (void)getBumpInfo{
+    [[BumpClient sharedClient] setDataReceivedBlock:^(BumpChannelID channel, NSData *data) {
+        NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSDictionary *response = [jsonString JSONValue];
+        NSLog(@"Parsewd answer %@  %@", response, jsonString);
+        
+        NSLog(@"Data received from %@: %@",
+              [[BumpClient sharedClient] userIDForChannel:channel], response
+              );
+    }];
+}
+
+
+- (void)sendBumpData{
+    NSDictionary *dictionary = @{
+                                 @"attack":@"0",
+                                };
+    
+    
+    
+    [[BumpClient sharedClient] setChannelConfirmedBlock:^(BumpChannelID channel) {
+        NSLog(@"Channel with %@ confirmed.", [[BumpClient sharedClient] userIDForChannel:channel]);
+        NSError *error ;
+        
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary options:NSJSONWritingPrettyPrinted error:&error];
+        if (!error) {
+            [[BumpClient sharedClient] sendData:jsonData
+                                      toChannel:channel];
+            
+        }
+    }];
+    
+}
+
+- (void)catchBumpDetection{
+    [[BumpClient sharedClient] setBumpEventBlock:^(bump_event event) {
+        switch(event) {
+            case BUMP_EVENT_BUMP:
+                NSLog(@"Bump detected.");
+                break;
+            case BUMP_EVENT_NO_MATCH:
+                NSLog(@"No match.");
+                break;
+        }
+    }];
+}
+
+
 
 
 

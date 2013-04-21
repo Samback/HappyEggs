@@ -1,0 +1,3 @@
+[submodule "iPhone/CustomLibraries"]
+	path = iPhone/CustomLibraries
+	url = git://github.com/goncz9/GRAlertView.git
