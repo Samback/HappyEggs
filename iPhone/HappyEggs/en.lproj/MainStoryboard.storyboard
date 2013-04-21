@@ -19,20 +19,20 @@
                                     </view>
                                     <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pTn-qv-eRH">
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="150" type="user" id="1jx-11-r4q"/>
+                                            <constraint firstAttribute="height" constant="120" id="52x-0b-THm"/>
                                         </constraints>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cIe-Fn-ILF">
-                                            <size key="itemSize" width="100" height="150"/>
+                                            <size key="itemSize" width="80" height="100"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HEggCell" id="YnS-so-6Dn" customClass="HEggCell">
-                                                <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
+                                                <rect key="frame" x="0.0" y="10" width="80" height="100"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="80" height="100"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yku-Id-JUZ">
@@ -43,12 +43,12 @@
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstItem="dSF-XU-gNV" firstAttribute="leading" secondItem="yku-Id-JUZ" secondAttribute="leading" type="default" id="3TC-RA-rO9"/>
-                                                                <constraint firstItem="OAH-1B-zwj" firstAttribute="top" secondItem="yku-Id-JUZ" secondAttribute="top" type="default" id="54V-BF-fv1"/>
-                                                                <constraint firstItem="dSF-XU-gNV" firstAttribute="bottom" secondItem="yku-Id-JUZ" secondAttribute="bottom" type="default" id="AGG-pd-L2q"/>
                                                                 <constraint firstItem="dSF-XU-gNV" firstAttribute="trailing" secondItem="yku-Id-JUZ" secondAttribute="trailing" type="default" id="HiA-j9-UTx"/>
                                                                 <constraint firstItem="OAH-1B-zwj" firstAttribute="trailing" secondItem="yku-Id-JUZ" secondAttribute="trailing" type="default" id="Li9-Ha-4p7"/>
-                                                                <constraint firstItem="OAH-1B-zwj" firstAttribute="bottom" secondItem="yku-Id-JUZ" secondAttribute="bottom" type="default" id="TL3-ZL-pAs"/>
+                                                                <constraint firstItem="dSF-XU-gNV" firstAttribute="bottom" secondItem="yku-Id-JUZ" secondAttribute="bottom" type="default" id="hFw-AD-cz4"/>
+                                                                <constraint firstItem="OAH-1B-zwj" firstAttribute="top" secondItem="yku-Id-JUZ" secondAttribute="top" type="default" id="iEJ-zs-Izb"/>
                                                                 <constraint firstItem="dSF-XU-gNV" firstAttribute="top" secondItem="yku-Id-JUZ" secondAttribute="top" type="default" id="kQq-zg-1hF"/>
+                                                                <constraint firstItem="OAH-1B-zwj" firstAttribute="bottom" secondItem="yku-Id-JUZ" secondAttribute="bottom" type="default" id="lKl-tF-tEu"/>
                                                                 <constraint firstItem="OAH-1B-zwj" firstAttribute="leading" secondItem="yku-Id-JUZ" secondAttribute="leading" type="default" id="vdx-3A-YOM"/>
                                                             </constraints>
                                                         </view>
@@ -57,14 +57,15 @@
                                                 </view>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstItem="yku-Id-JUZ" firstAttribute="trailing" secondItem="YnS-so-6Dn" secondAttribute="trailing" type="default" id="6Of-CX-zWN"/>
-                                                    <constraint firstItem="yku-Id-JUZ" firstAttribute="leading" secondItem="YnS-so-6Dn" secondAttribute="leading" type="default" id="H7o-xs-vqg"/>
-                                                    <constraint firstItem="yku-Id-JUZ" firstAttribute="top" secondItem="YnS-so-6Dn" secondAttribute="top" type="default" id="tlM-MC-TGQ"/>
-                                                    <constraint firstItem="yku-Id-JUZ" firstAttribute="bottom" secondItem="YnS-so-6Dn" secondAttribute="bottom" type="default" id="viw-V4-Soy"/>
+                                                    <constraint firstItem="yku-Id-JUZ" firstAttribute="top" secondItem="YnS-so-6Dn" secondAttribute="top" type="default" id="A8O-AS-b4g"/>
+                                                    <constraint firstItem="yku-Id-JUZ" firstAttribute="bottom" secondItem="YnS-so-6Dn" secondAttribute="bottom" type="default" id="fQ5-75-daJ"/>
+                                                    <constraint firstAttribute="trailing" secondItem="yku-Id-JUZ" secondAttribute="trailing" type="user" id="rn8-2Z-vCK"/>
+                                                    <constraint firstItem="yku-Id-JUZ" firstAttribute="leading" secondItem="YnS-so-6Dn" secondAttribute="leading" type="default" id="wvz-Ye-8lA"/>
                                                 </constraints>
                                                 <connections>
                                                     <outlet property="eggImage" destination="OAH-1B-zwj" id="Glg-zH-Dj2"/>
                                                     <outlet property="eggTopBackground" destination="dSF-XU-gNV" id="HSd-Zk-HJf"/>
+                                                    <outlet property="imagesContainer" destination="yku-Id-JUZ" id="TrG-aV-71O"/>
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>
@@ -75,15 +76,20 @@
                                     </collectionView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstItem="pTn-qv-eRH" firstAttribute="bottom" secondItem="TsF-5e-Gbw" secondAttribute="bottom" type="user" id="Dzd-Qk-4hq"/>
+                                    <constraint firstAttribute="bottom" secondItem="N90-gj-NqQ" secondAttribute="bottom" constant="122" id="5PB-A1-XTD"/>
                                     <constraint firstItem="N90-gj-NqQ" firstAttribute="top" secondItem="TsF-5e-Gbw" secondAttribute="top" type="default" id="IuK-t7-lUb"/>
                                     <constraint firstItem="pTn-qv-eRH" firstAttribute="trailing" secondItem="TsF-5e-Gbw" secondAttribute="trailing" type="default" id="LPu-0r-dN4"/>
                                     <constraint firstItem="pTn-qv-eRH" firstAttribute="leading" secondItem="TsF-5e-Gbw" secondAttribute="leading" type="default" id="WQB-JD-XUd"/>
                                     <constraint firstItem="N90-gj-NqQ" firstAttribute="leading" secondItem="TsF-5e-Gbw" secondAttribute="leading" type="default" id="Xql-Ye-TNM"/>
                                     <constraint firstItem="N90-gj-NqQ" firstAttribute="trailing" secondItem="TsF-5e-Gbw" secondAttribute="trailing" type="default" id="ZKl-sb-6HO"/>
-                                    <constraint firstItem="pTn-qv-eRH" firstAttribute="top" secondItem="N90-gj-NqQ" secondAttribute="bottom" type="user" id="tST-bT-TDW"/>
+                                    <constraint firstAttribute="bottom" secondItem="pTn-qv-eRH" secondAttribute="bottom" type="user" id="beH-WI-iuP"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="OWS-8q-MoV" appends="YES" id="rH6-yb-26Q"/>
+                                    <outletCollection property="gestureRecognizers" destination="l4J-Io-m5h" appends="YES" id="qeN-e1-CmF"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -106,6 +112,16 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y0p-6E-vNb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="OWS-8q-MoV">
+                    <connections>
+                        <action selector="longPressForDelete:" destination="ejY-Dg-1GZ" id="u4L-Tv-tKd"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <tapGestureRecognizer id="l4J-Io-m5h">
+                    <connections>
+                        <action selector="tappedCell:" destination="ejY-Dg-1GZ" id="1Vy-03-RZB"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="652" y="18"/>
         </scene>
@@ -130,16 +146,23 @@
         </scene>
     </scenes>
     <classes>
+        <class className="GAITrackedViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GAITrackedViewController.h"/>
+        </class>
         <class className="HEggCell" superclassName="UICollectionViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/HEggCell.h"/>
             <relationships>
                 <relationship kind="outlet" name="eggImage" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="eggTopBackground" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="imagesContainer" candidateClass="UIView"/>
             </relationships>
         </class>
-        <class className="HEggHomePageVC" superclassName="UIViewController">
+        <class className="HEggHomePageVC" superclassName="GAITrackedViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/HEggHomePageVC.h"/>
             <relationships>
+                <relationship kind="action" name="longPressForDelete:" candidateClass="UILongPressGestureRecognizer"/>
+                <relationship kind="action" name="shareWithFriends:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="tappedCell:" candidateClass="UITapGestureRecognizer"/>
                 <relationship kind="outlet" name="eggsList" candidateClass="UICollectionView"/>
             </relationships>
         </class>

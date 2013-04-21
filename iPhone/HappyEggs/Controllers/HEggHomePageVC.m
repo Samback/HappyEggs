@@ -6,16 +6,20 @@
 //  Copyright (c) 2013 Max Tymchii. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "HEggHomePageVC.h"
 #import "Egg.h"
 #import "HEggCell.h"
 #import "SBJson.h"
 
+#define  RADIUS 15
 
-@interface HEggHomePageVC ()<NSFetchedResultsControllerDelegate>
+@interface HEggHomePageVC ()<NSFetchedResultsControllerDelegate, FDTakeDelegate>
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (weak, nonatomic) IBOutlet UICollectionView *eggsList;
 @property (nonatomic, strong) REActivityViewController *activityViewController;
+@property (nonatomic) NSInteger numberOfUniqeEggs;
+@property (nonatomic, strong) FDTakeController *takeController;
 @end
 
 @implementation HEggHomePageVC
@@ -52,8 +56,27 @@
     [super viewDidLoad];
     [self configureBump];
     self.trackedViewName = @"Home page";
+    
+    self.takeController = [[FDTakeController alloc] init];
+    self.takeController.delegate = self;
+    
+    
+    NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"FDTakeTranslations"];
+    NSLog(@"%@", myBundle);
+    NSString *str = NSLocalizedStringFromTableInBundle(@"noSources",
+                                                       nil,
+                                                       [NSBundle bundleWithIdentifier:@"FDTakeTranslations"],
+                                                       @"There are no sources available to select a photo");
+    NSLog(@"%@", str);
+
 }
 
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.eggsList scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:SHRT_MAX/2 inSection:0] atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
+}
 
 - (NSFetchedResultsController *)fetchedResultsController{
     
@@ -82,15 +105,19 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     // Return the number of rows in the section.
     id sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
-    
-    return [sectionInfo numberOfObjects];
-    
+    self.numberOfUniqeEggs = [sectionInfo numberOfObjects];
+    return INT16_MAX;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *cellIdentifier = @"HEggCell";
+    
     HEggCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-    Egg *egg = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    NSLog(@"Fake %d", indexPath.item % self.numberOfUniqeEggs);
+    NSIndexPath *fakePosition = [NSIndexPath indexPathForItem:indexPath.item % self.numberOfUniqeEggs inSection:0];
+    Egg *egg = [self.fetchedResultsController objectAtIndexPath:fakePosition];
+    cell.layer.cornerRadius = RADIUS;
+    cell.layer.masksToBounds = YES;
     NSLog(@"Egg background %@", egg.background);
     cell.eggImage.image = [UIImage imageNamed:egg.background];
     cell.contentView.backgroundColor = [UIColor redColor];
@@ -98,12 +125,89 @@
 }
 
 
+- (IBAction)tappedCell:(UITapGestureRecognizer *)sender {
+    CGPoint location = [sender locationInView:self.eggsList];
+    NSIndexPath *fakePosition = [NSIndexPath indexPathForItem:[self.eggsList indexPathForItemAtPoint:location].item % self.numberOfUniqeEggs inSection:0];
+    Egg *egg = [self.fetchedResultsController objectAtIndexPath:fakePosition];
+    if ([egg.type isEqualToString:ADD_NEW_EGG_TYPE]) {
+        [self addNewEggBranch];
+    }
+    else
+    {
+        [self chooseNewSkinForEgg];
+    }
+
+}
+
+
+- (void)addNewEggBranch
+{
+    NSLog(@"Add new Egg");
+    [self.takeController takePhotoOrChooseFromLibrary];
+}
+
+
+
+- (IBAction)takePhotoOrChooseFromLibrary
+{
+
+}
+
+#pragma mark - FDTakeDelegate
+
+- (void)takeController:(FDTakeController *)controller didCancelAfterAttempting:(BOOL)madeAttempt
+{
+//    UIAlertView *alertView;
+//    if (madeAttempt)
+//        alertView = [[UIAlertView alloc] initWithTitle:@"Example app" message:@"The take was cancelled after selecting media" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//    else
+//        alertView = [[UIAlertView alloc] initWithTitle:@"Example app" message:@"The take was cancelled without selecting media" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//    [alertView show];
+}
+
+- (void)takeController:(FDTakeController *)controller gotPhoto:(UIImage *)photo withInfo:(NSDictionary *)info
+{
+     NSManagedObjectContext *context = [RKManagedObjectStore defaultStore].mainQueueManagedObjectContext;
+    NSLog(@"geted image %@", photo);
+    NSInteger eggId = self.numberOfUniqeEggs;
+    [Egg addEggWithName:[NSString stringWithFormat:@"Image name %d", eggId] background:@"1.jpg" couldDelete:YES eggId:eggId type:USER_EGG_TYPE andContext:context];
+}
+
+
+- (void)chooseNewSkinForEgg
+{
+    NSLog(@"reskin");
+}
+
+- (void)deleteEggAtIndex:(NSIndexPath *)indexPath
+{
+    NSLog(@"Try to delete %@", indexPath);
+    NSIndexPath *fakePosition = [NSIndexPath indexPathForItem:indexPath.item % self.numberOfUniqeEggs inSection:0];
+    Egg *egg = [self.fetchedResultsController objectAtIndexPath:fakePosition];
+    HEggCell *eggCell = (HEggCell *)[self.eggsList cellForItemAtIndexPath:indexPath];
+    if ([egg.type isEqualToString:USER_EGG_TYPE]) {
+        [eggCell startJiggling];
+//        [[RKObjectManager sharedManager].managedObjectStore.mainQueueManagedObjectContext deleteObject:egg];
+//        NSError *error = nil;
+//        [[RKObjectManager sharedManager].managedObjectStore.mainQueueManagedObjectContext saveToPersistentStore:&error];
+//        if (error) {
+//            NSLog(@"Some problems on saving at favorites");
+//        }
+
+    }
+}
+
+
+- (IBAction)longPressForDelete:(UILongPressGestureRecognizer *)sender {
+    CGPoint location = [sender locationInView:self.eggsList]; 
+    [self deleteEggAtIndex: [self.eggsList indexPathForItemAtPoint:location]];
+}
+
 #pragma mark - NSFetchedResultsControllerDelegate
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller{
     [self.eggsList reloadData];
 }
-
 
 
 #pragma mark - BUMP methods
@@ -184,6 +288,8 @@
 - (IBAction)shareWithFriends:(UIBarButtonItem *)sender {
     [self.activityViewController presentFromRootViewController];
 }
+
+
 
 
 

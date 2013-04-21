@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		5016B2A21724012A00A83CD8 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5016B2A01724012A00A83CD8 /* libGoogleAnalytics.a */; };
 		5016B2A517244FAE00A83CD8 /* addImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5016B2A417244FAE00A83CD8 /* addImage.jpg */; };
+		5016B2A7172461E400A83CD8 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5016B2A6172461E400A83CD8 /* AssetsLibrary.framework */; };
+		5016B2A917246FB200A83CD8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5016B2A817246FB200A83CD8 /* QuartzCore.framework */; };
 		501B04531723A70D00F9A5AD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501B04521723A70D00F9A5AD /* UIKit.framework */; };
 		501B04551723A70D00F9A5AD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501B04541723A70D00F9A5AD /* Foundation.framework */; };
 		501B04571723A70D00F9A5AD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501B04561723A70D00F9A5AD /* CoreGraphics.framework */; };
@@ -59,6 +61,8 @@
 		5016B29F1724012A00A83CD8 /* GAITransactionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITransactionItem.h; sourceTree = "<group>"; };
 		5016B2A01724012A00A83CD8 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
 		5016B2A417244FAE00A83CD8 /* addImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = addImage.jpg; sourceTree = "<group>"; };
+		5016B2A6172461E400A83CD8 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		5016B2A817246FB200A83CD8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		501B044F1723A70D00F9A5AD /* HappyEggs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyEggs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		501B04521723A70D00F9A5AD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		501B04541723A70D00F9A5AD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -126,6 +130,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5016B2A917246FB200A83CD8 /* QuartzCore.framework in Frameworks */,
+				5016B2A7172461E400A83CD8 /* AssetsLibrary.framework in Frameworks */,
 				5090196D1723C1BA00902DEB /* AudioToolbox.framework in Frameworks */,
 				5090196B1723C1AD00902DEB /* CoreLocation.framework in Frameworks */,
 				509019691723C1A600902DEB /* CFNetwork.framework in Frameworks */,
@@ -160,6 +166,8 @@
 		501B04461723A70D00F9A5AD = {
 			isa = PBXGroup;
 			children = (
+				5016B2A817246FB200A83CD8 /* QuartzCore.framework */,
+				5016B2A6172461E400A83CD8 /* AssetsLibrary.framework */,
 				5016B29A1724012A00A83CD8 /* GA */,
 				509019981723C64A00902DEB /* Controllers */,
 				509019551723AE7A00902DEB /* Helpers */,

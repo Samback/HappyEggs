@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface HEggCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UIView *imagesContainer;
 @property (weak, nonatomic) IBOutlet UIImageView *eggImage;
 
 @property (weak, nonatomic) IBOutlet UIImageView *eggTopBackground;
+- (void)startJiggling;
+- (void)stopJiggling;
 
 @end
