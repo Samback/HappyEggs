@@ -7,11 +7,13 @@
 //
 
 #import "AppDelegate.h"
+#import "Egg.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [self initRestKitWithCoreDataIntegration];
     // Override point for customization after application launch.
     return YES;
 }
@@ -42,5 +44,39 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
+#pragma mark - Restkit config
+- (void)initRestKitWithCoreDataIntegration{
+    //Activity indicator
+    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+    
+    RKObjectManager* objectManager = [RKObjectManager managerWithBaseURL:[NSURL URLWithString:BASE_URL]];
+    [objectManager.HTTPClient setDefaultHeader:@"Accept" value:RKMIMETypeJSON];
+    [objectManager.HTTPClient setParameterEncoding:AFJSONParameterEncoding];
+    NSURL *modelURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"DataBase" ofType:@"momd"]];
+    // NOTE: Due to an iOS 5 bug, the managed object model returned is immutable.
+    NSManagedObjectModel *managedObjectModel = [[[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL] mutableCopy];
+    RKManagedObjectStore *managedObjectStore = [[RKManagedObjectStore alloc] initWithManagedObjectModel:managedObjectModel];
+    [managedObjectStore createPersistentStoreCoordinator];
+    
+    NSString *storePath = [RKApplicationDataDirectory() stringByAppendingPathComponent:@"DataBase.sqlite"];
+    
+    NSError *error;
+    
+    NSPersistentStore *persistentStore = [managedObjectStore addSQLitePersistentStoreAtPath:storePath fromSeedDatabaseAtPath:nil withConfiguration:nil options:@{NSMigratePersistentStoresAutomaticallyOption:@YES, NSInferMappingModelAutomaticallyOption:@YES} error:&error];
+    
+    NSAssert(persistentStore, @"Failed to add persistent store with error: %@", error);
+    
+    [managedObjectStore createManagedObjectContexts];
+    
+    // Configure a managed object cache to ensure we do not create duplicate objects
+    managedObjectStore.managedObjectCache = [[RKInMemoryManagedObjectCache alloc] initWithManagedObjectContext:managedObjectStore.persistentStoreManagedObjectContext];
+    
+    self.managedObjectModel = managedObjectModel;
+    objectManager.managedObjectStore = managedObjectStore;
+    
+}
+
 
 @end
