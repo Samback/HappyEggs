@@ -14,6 +14,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self initRestKitWithCoreDataIntegration];
+    [self initSourceInCoreData];
     // Override point for customization after application launch.
     return YES;
 }
@@ -75,6 +76,33 @@
     
     self.managedObjectModel = managedObjectModel;
     objectManager.managedObjectStore = managedObjectStore;
+}
+
+- (void)initSourceInCoreData
+{
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[Egg entityName]];
+    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"eggId" ascending:YES]];
+   
+    NSError *error;
+    NSArray *results = [[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext executeFetchRequest:fetchRequest error:&error];
+    NSAssert(!error, @"Error performing fetch request: %@", error);
+    if (!error) {
+        if (results.count == 0) {
+            [self fillCoreDataWithBaseEggs];
+        }
+    }
+}
+
+
+- (void)fillCoreDataWithBaseEggs
+{
+    NSManagedObjectContext *context = self.managedObjectStore.mainQueueManagedObjectContext;
+    
+    [Egg addEggWithName:@"first egg" background:@"1.jpg" couldDelete:NO eggId:1 andContext:context];
+    
+    [Egg addEggWithName:@"second egg" background:@"2.jpg" couldDelete:NO eggId:2 andContext:context];
+    
+    [Egg addEggWithName:@"third egg" background:@"3.jpg" couldDelete:NO eggId:3 andContext:context]; 
     
 }
 
