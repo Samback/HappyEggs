@@ -12,3 +12,8 @@
 
 #define GA_API_KEY @"UA-38756409-2"
 #define TIME_OF_GA_UPDATE 10
+
+
+#define ADD_NEW_EGG_TYPE @"Add new egg"
+#define DEFAULT_EGG_TYPE @"Default egg"
+#define USER_EGG_TYPE @"Custom egg"

@@ -100,12 +100,10 @@
 {
     NSManagedObjectContext *context = [RKManagedObjectStore defaultStore].mainQueueManagedObjectContext;
     
-    [Egg addEggWithName:@"first egg" background:@"1.jpg" couldDelete:NO eggId:1 andContext:context];
-    
-    [Egg addEggWithName:@"second egg" background:@"2.jpg" couldDelete:NO eggId:2 andContext:context];
-    
-    [Egg addEggWithName:@"third egg" background:@"3.jpeg" couldDelete:NO eggId:3 andContext:context];
-    [Egg addEggWithName:@"fourth egg" background:@"1.jpg" couldDelete:NO eggId:4 andContext:context];
+    [Egg addEggWithName:@"Add egg" background:@"addImage.jpg" couldDelete:NO eggId:0 type:ADD_NEW_EGG_TYPE andContext:context];
+    [Egg addEggWithName:@"first egg" background:@"1.jpg" couldDelete:NO eggId:1 type:DEFAULT_EGG_TYPE andContext:context];
+    [Egg addEggWithName:@"second egg" background:@"2.jpg" couldDelete:NO eggId:2 type:DEFAULT_EGG_TYPE andContext:context];
+    [Egg addEggWithName:@"third egg" background:@"3.jpeg" couldDelete:NO eggId:3 type:DEFAULT_EGG_TYPE andContext:context];   
     
 }
 

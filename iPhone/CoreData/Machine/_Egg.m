@@ -8,6 +8,7 @@ const struct EggAttributes EggAttributes = {
 	.couldDelete = @"couldDelete",
 	.eggId = @"eggId",
 	.name = @"name",
+	.type = @"type",
 };
 
 const struct EggRelationships EggRelationships = {
@@ -117,6 +118,13 @@ const struct EggFetchedProperties EggFetchedProperties = {
 
 
 @dynamic name;
+
+
+
+
+
+
+@dynamic type;
 
 
 

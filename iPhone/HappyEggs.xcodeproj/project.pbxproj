@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5016B2A21724012A00A83CD8 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5016B2A01724012A00A83CD8 /* libGoogleAnalytics.a */; };
+		5016B2A517244FAE00A83CD8 /* addImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5016B2A417244FAE00A83CD8 /* addImage.jpg */; };
 		501B04531723A70D00F9A5AD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501B04521723A70D00F9A5AD /* UIKit.framework */; };
 		501B04551723A70D00F9A5AD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501B04541723A70D00F9A5AD /* Foundation.framework */; };
 		501B04571723A70D00F9A5AD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501B04561723A70D00F9A5AD /* CoreGraphics.framework */; };
@@ -57,6 +58,7 @@
 		5016B29E1724012A00A83CD8 /* GAITransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITransaction.h; sourceTree = "<group>"; };
 		5016B29F1724012A00A83CD8 /* GAITransactionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITransactionItem.h; sourceTree = "<group>"; };
 		5016B2A01724012A00A83CD8 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
+		5016B2A417244FAE00A83CD8 /* addImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = addImage.jpg; sourceTree = "<group>"; };
 		501B044F1723A70D00F9A5AD /* HappyEggs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyEggs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		501B04521723A70D00F9A5AD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		501B04541723A70D00F9A5AD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -264,6 +266,7 @@
 		5090195D1723B85F00902DEB /* eggs */ = {
 			isa = PBXGroup;
 			children = (
+				5016B2A417244FAE00A83CD8 /* addImage.jpg */,
 				5090195E1723B85F00902DEB /* 1.jpg */,
 				5090195F1723B85F00902DEB /* 2.jpg */,
 				509019601723B85F00902DEB /* 3.jpeg */,
@@ -393,6 +396,7 @@
 				509019611723B85F00902DEB /* 1.jpg in Resources */,
 				509019621723B85F00902DEB /* 2.jpg in Resources */,
 				509019631723B85F00902DEB /* 3.jpeg in Resources */,
+				5016B2A517244FAE00A83CD8 /* addImage.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
