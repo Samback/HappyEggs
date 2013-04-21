@@ -15,4 +15,5 @@
     #import <RestKit/RestKit.h>
     #import "HEggDefentitions.h"
     #import "BumpClient.h"
+    #import <REActivityViewController/REActivityViewController.h>
 #endif

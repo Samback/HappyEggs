@@ -94,7 +94,13 @@
                             <constraint firstItem="TsF-5e-Gbw" firstAttribute="trailing" secondItem="dFw-b2-Vwb" secondAttribute="trailing" type="default" id="vTh-8M-X3k"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="7Ds-a8-QYY"/>
+                    <navigationItem key="navigationItem" id="7Ds-a8-QYY">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="zT7-OJ-ufV">
+                            <connections>
+                                <action selector="shareWithFriends:" destination="ejY-Dg-1GZ" id="FRS-Qd-dQq"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="eggsList" destination="pTn-qv-eRH" id="Pqj-tv-kvN"/>
                     </connections>
@@ -108,7 +114,8 @@
             <objects>
                 <navigationController id="tLu-Mi-hUz" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oxt-gj-dQI">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackOpaque" id="oxt-gj-dQI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
