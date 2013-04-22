@@ -304,8 +304,8 @@
 
 - (void)sendBumpData
 {
-    
-    self.userAttack = arc4random()%100;
+    srandom(time(NULL));    
+    self.userAttack = random() % 100;
     NSDictionary *dictionary = @{
                                  @"attack":[NSString stringWithFormat:@"%d", self.userAttack],
                                  };   
