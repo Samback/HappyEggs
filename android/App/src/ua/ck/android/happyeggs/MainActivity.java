@@ -38,6 +38,8 @@ public class MainActivity extends SherlockActivity implements AdapterView.OnItem
 	private boolean bumpStatus; 
 	private int myNumber = 0, hisNumber = 0;
 	
+	
+	
 	@Override
     protected void onStart() {
         EasyTracker.getInstance().activityStart(this);

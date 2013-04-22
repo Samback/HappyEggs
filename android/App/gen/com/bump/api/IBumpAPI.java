@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: /Users/anegin/Documents/Projects/HappyEggs/src/com/bump/api/IBumpAPI.aidl
+ * Original file: C:\\Dev\\Android\\HappyEggs\\android\\App\\src\\com\\bump\\api\\IBumpAPI.aidl
  */
 package com.bump.api;
 public interface IBumpAPI extends android.os.IInterface
