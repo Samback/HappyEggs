@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">"Happy Eggs"</string>
+    <string name="action_status">"Статус соединения"</string>
+    <string name="action_refresh">"Обновить"</string>
+    <string name="hello_world">Hello world!</string>
+	<string name="share">Share</string>
+    <string name="sharesubject">Eggs Fight</string>
+    <string name="sharetext">"Check out share text"</string>
+</resources>
