@@ -1,20 +1,31 @@
 package ua.ck.android.happyeggs;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Random;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import ua.ck.android.happyeggs.adapters.ScrollAdapter;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -32,13 +43,23 @@ import com.google.analytics.tracking.android.EasyTracker;
 
 
 public class MainActivity extends SherlockActivity implements AdapterView.OnItemClickListener {
+	private static final int SELECT_CAMERA = 101;
+	private static final int SELECT_GALERY = 102;
 	private final String JSON_TAG = "attack";
 	private IBumpAPI api;
+	private Uri imageUri;
 	private final String tag ="!!!CHEB!!!";
 	private boolean bumpStatus; 
+	private  ImageView imgEgg;
+	private AlertDialog.Builder ad;
 	private int myNumber = 0, hisNumber = 0;
-	
-	
+	private int[] images = {R.drawable.egg1,
+							R.drawable.egg2,
+							R.drawable.egg3,
+							R.drawable.egg4,
+							R.drawable.egg5,
+							R.drawable.egg6,
+							R.drawable.egg7};
 	
 	@Override
     protected void onStart() {
@@ -57,9 +78,9 @@ public class MainActivity extends SherlockActivity implements AdapterView.OnItem
         super.onCreate(savedInstanceState);
         bumpStatus = false;
         setContentView(R.layout.activity_main);
-        ImageView imgEgg = (ImageView)findViewById(R.id.imgEgg);
+        imgEgg = (ImageView)findViewById(R.id.imgEgg);
         HorizontalListView listview = (HorizontalListView) findViewById(R.id.listview);
-        ScrollAdapter adapter = new ScrollAdapter(30, getApplicationContext());
+        ScrollAdapter adapter = new ScrollAdapter(images.length, getApplicationContext(), images);
         listview.setAdapter(adapter);
         listview.setOnItemClickListener(this);
         initBump();
@@ -170,9 +191,120 @@ public class MainActivity extends SherlockActivity implements AdapterView.OnItem
     
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		Toast.makeText(getApplicationContext(), "Choosen", Toast.LENGTH_LONG).show();		
+		if (position != 0){
+			BitmapFactory.Options o2 = new BitmapFactory.Options();
+	    	o2.inSampleSize=5;
+	    	Bitmap bm = BitmapFactory.decodeResource(getResources(), images[position], o2);
+	    	imgEgg.setImageBitmap(bm);
+		}else{
+			showPhotoDialog();
+		}
 	}	
 
+	private void showPhotoDialog(){
+		ad = new AlertDialog.Builder(this);
+		ad.setTitle("Choose source"); // 
+		ad.setMessage("Camera or gallery"); // 
+		ad.setCancelable(true);
+		ad.setPositiveButton("Camera", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				openCamera();
+			}
+		});
+		ad.setNeutralButton("Gallery", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				openGallery();
+			}
+		});
+		ad.show();
+		
+		}
+	
+	private void openCamera(){
+	Log.i("Opt","Camera");
+	Log.d("ANDRO_CAMERA", "Starting camera on the phone...");
+	        String fileName = "testphoto.jpg";
+	        ContentValues values = new ContentValues();
+	        values.put(MediaStore.Images.Media.TITLE, fileName);
+	        values.put(MediaStore.Images.Media.DESCRIPTION,
+	                "Image capture by camera");
+	        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+	        imageUri = this.getContentResolver().insert( MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+	        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+	        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+	        intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
+	        startActivityForResult(intent, SELECT_CAMERA);
+	}
+	
+	private void openGallery(){
+		Log.i("Opt","Gallery");
+		Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+		photoPickerIntent.setType("image/*");
+		startActivityForResult(photoPickerIntent, SELECT_GALERY);
+	}
+	
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		switch(requestCode) {
+			case SELECT_GALERY:
+				if(resultCode == Activity.RESULT_OK){
+					setImage(data.getData());	
+				}
+					break;
+			case SELECT_CAMERA:
+				if(resultCode == Activity.RESULT_OK){
+					setImage(imageUri);	
+				}
+				break;	
+	
+		}	
+	}
+	
+	private Boolean setImage(Uri uri) {
+		Log.i("Image URI", uri.toString());
+		// Log.i("Image File path", getRealPathFromURI(uri));
+		try {
+			if (((BitmapDrawable) imgEgg.getDrawable()) != null)
+				(((BitmapDrawable) imgEgg.getDrawable()).getBitmap()).recycle();
+			InputStream imageStream = getContentResolver().openInputStream(uri);
+			Bitmap bmp = BitmapFactory.decodeStream(imageStream);
+			int width = bmp.getWidth();
+			int height = bmp.getHeight();
+			float k;
+			if (width > height) {
+				if (width > 2048) {
+					k = width / height;
+					width = 2048;
+					height = (int) (2048 / k);
+					imgEgg.setImageBitmap(Bitmap.createScaledBitmap(bmp, width,
+							height, false));
+				} else {
+					imgEgg.setImageBitmap(bmp);
+				}
+			} else {
+				if (height > 2048) {
+					k = height / width;
+					height = 2048;
+					width = (int) (2048 / k);
+					imgEgg.setImageBitmap(Bitmap.createScaledBitmap(bmp, width,
+							height, false));
+				} else {
+					imgEgg.setImageBitmap(bmp);
+				}
+			}
+			// imgInit = true;
+			return true;
+		} catch (FileNotFoundException e) {
+			Log.i("FileNotFound", "FileNotFound");
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getSupportMenuInflater().inflate(R.menu.main, menu);

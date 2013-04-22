@@ -913,10 +913,17 @@ containing a value of this type.
         public static final int abs__textfield_searchview_right_holo_dark=0x7f02006d;
         public static final int abs__textfield_searchview_right_holo_light=0x7f02006e;
         public static final int abs__toast_frame=0x7f02006f;
-        public static final int ic_action_fail=0x7f020070;
-        public static final int ic_action_ok=0x7f020071;
-        public static final int ic_launcher=0x7f020072;
-        public static final int icon=0x7f020073;
+        public static final int egg1=0x7f020070;
+        public static final int egg2=0x7f020071;
+        public static final int egg3=0x7f020072;
+        public static final int egg4=0x7f020073;
+        public static final int egg5=0x7f020074;
+        public static final int egg6=0x7f020075;
+        public static final int egg7=0x7f020076;
+        public static final int ic_action_fail=0x7f020077;
+        public static final int ic_action_ok=0x7f020078;
+        public static final int ic_launcher=0x7f020079;
+        public static final int icon=0x7f02007a;
     }
     public static final class id {
         public static final int abs__action_bar=0x7f040020;
