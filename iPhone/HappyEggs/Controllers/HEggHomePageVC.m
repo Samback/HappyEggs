@@ -14,6 +14,10 @@
 
 #define  RADIUS 15
 
+#define TAG_WIN 0
+#define TAG_TIE 1
+#define TAG_LOSE 2
+
 @interface HEggHomePageVC ()<NSFetchedResultsControllerDelegate, FDTakeDelegate, UIAlertViewDelegate>
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (weak, nonatomic) IBOutlet UICollectionView *eggsList;
@@ -24,6 +28,9 @@
 @property (nonatomic, strong) Egg *selectedEgg;
 @property (weak, nonatomic) IBOutlet UIImageView *eggSkinImage;
 @property (nonatomic, strong) Egg *eggOnScreen;
+@property (nonatomic) int userAttack;
+@property (nonatomic) int enemyAttack;
+@property (nonatomic, getter = isActiveToFight) BOOL activeToFight;
 @end
 
 @implementation HEggHomePageVC
@@ -59,6 +66,7 @@
 {
     [super viewDidLoad];
     [self configureBump];
+    self.activeToFight = YES;
     self.trackedViewName = @"Home page";
     
     self.takeController = [[FDTakeController alloc] init];
@@ -142,11 +150,9 @@
     if ([egg.type isEqualToString:ADD_NEW_EGG_TYPE]) {
         [self addNewEggBranch];
     }
-    else
-    {
+    else {
         [self chooseNewSkinForEgg:egg];
     }
-
 }
 
 
@@ -181,6 +187,7 @@
 - (void)chooseNewSkinForEgg:(Egg *)newEgg
 {
     NSLog(@"reskin");
+    self.activeToFight = YES;
     self.eggOnScreen = newEgg;
     self.eggSkinImage.image = [UIImage imageNamed:self.eggOnScreen.background];
 }
@@ -200,8 +207,7 @@
         self.deleteEggAlert = [[UIAlertView alloc] initWithTitle:APP_NAME message:DELETE_EGG_MESSAGE delegate:self cancelButtonTitle:NO_MESSAGE otherButtonTitles:YES_MESSAGE, nil];
         self.selectedEgg = egg;
         [self.deleteEggAlert show];
-    }
-    
+    }    
 }
 
 
@@ -244,22 +250,6 @@
 }
 
 
-#pragma mark - UIAlertView Delegate methods
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if ([alertView isEqual:self.deleteEggAlert]) {
-        if (buttonIndex == 0) {
-            [self stopJigglingOnCollection];
-            self.deleteEggAlert = nil;
-            
-        }
-        else {
-            [self stopJigglingOnCollection];
-            [self deleteEgg];
-        }
-    }
-}
 
 - (void)stopJigglingOnCollection
 {
@@ -292,34 +282,46 @@
         }
     }];
 }
+
 - (void)getBumpInfo{
     [[BumpClient sharedClient] setDataReceivedBlock:^(BumpChannelID channel, NSData *data) {
-        NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSDictionary *response = [jsonString JSONValue];
-        NSLog(@"Parsewd answer %@  %@", response, jsonString);
-        
-        NSLog(@"Data received from %@: %@",
-              [[BumpClient sharedClient] userIDForChannel:channel], response
-              );
+        if (self.isActiveToFight) {
+            NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSDictionary *response = [jsonString JSONValue];
+            NSLog(@"Parsewd answer %@  %@", response, jsonString);
+            self.enemyAttack = ((NSString *)response[ATTACK_KEY]).intValue;
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self showResults];
+            });
+            NSLog(@"Data received from %@: %@",
+                  [[BumpClient sharedClient] userIDForChannel:channel], response
+                  );
+        }
     }];
 }
 
 
-- (void)sendBumpData{
-    NSDictionary *dictionary = @{
-                                 @"attack":@"0",
-                                 };
+- (void)sendBumpData
+{
     
+    self.userAttack = arc4random()%100;
+    NSDictionary *dictionary = @{
+                                 @"attack":[NSString stringWithFormat:@"%d", self.userAttack],
+                                 };   
     
     
     [[BumpClient sharedClient] setChannelConfirmedBlock:^(BumpChannelID channel) {
-        NSLog(@"Channel with %@ confirmed.", [[BumpClient sharedClient] userIDForChannel:channel]);
-        NSError *error ;
-        
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary options:NSJSONWritingPrettyPrinted error:&error];
-        if (!error) {
-            [[BumpClient sharedClient] sendData:jsonData
-                                      toChannel:channel];
+        if (self.isActiveToFight) {
+            NSLog(@"Channel with %@ confirmed.", [[BumpClient sharedClient] userIDForChannel:channel]);
+            NSError *error ;
+            
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary options:NSJSONWritingPrettyPrinted error:&error];
+            if (!error) {
+                [[BumpClient sharedClient] sendData:jsonData
+                                          toChannel:channel];
+                
+            }
             
         }
     }];
@@ -339,7 +341,56 @@
     }];
 }
 
+#pragma mark - Game Play
+- (void)showResults
+{
+    self.activeToFight = NO;
+    if (self.userAttack > self.enemyAttack) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:APP_NAME message:WIN_MESSAGE delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
+        alert.tag = TAG_WIN;
+        [alert show];
+    }
+    else if (self.userAttack == self.enemyAttack){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:APP_NAME message:TIE_MESSAGE delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
+        [alert show];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:APP_NAME message:LOSE_MESSAGE delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
+        [alert show];     
+    }    
+}
 
+- (void)crackAnimation
+{
+    NSLog(@"Show some animation");
+}
+
+
+#pragma mark - UIAlertView Delegate methods
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ([alertView isEqual:self.deleteEggAlert]) {
+        if (buttonIndex == 0) {//cancel delete
+            [self stopJigglingOnCollection];
+            self.deleteEggAlert = nil;
+            
+        }
+        else {//delete egg
+            [self stopJigglingOnCollection];
+            [self deleteEgg];
+        }
+    }
+    else if (alertView.tag == TAG_WIN) {
+        self.activeToFight = YES;
+    }
+    else if (alertView.tag == TAG_TIE) {
+        self.activeToFight = YES;
+    }
+    else if (alertView.tag == TAG_LOSE) {
+        self.activeToFight = NO;
+    }
+}
 
 
 @end
