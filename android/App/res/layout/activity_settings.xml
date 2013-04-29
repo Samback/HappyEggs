@@ -13,6 +13,17 @@
 	    android:id="@+id/editNick"
 	    android:hint="@string/nick_hint"
 	    android:textSize="30sp"
+	    android:singleLine="true"
+	    android:lines="1"
+	    android:inputType="textPersonName"
 	    android:layout_height="wrap_content"
 	    android:layout_width="match_parent"/>
+	<Button
+	    android:layout_gravity="center_horizontal"
+	    android:layout_margin="20dp"
+	    android:gravity="center"
+	    android:id="@+id/btnClose"
+	    android:text="@string/close"
+	    android:layout_height="wrap_content"
+	    android:layout_width="wrap_content"/>
 </LinearLayout>

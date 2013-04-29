@@ -75,7 +75,7 @@ public class MainActivity extends SherlockActivity implements AdapterView.OnItem
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);        
         bumpStatus = false;
         setContentView(R.layout.activity_main);
         imgEgg = (ImageView)findViewById(R.id.imgEgg);
@@ -84,6 +84,9 @@ public class MainActivity extends SherlockActivity implements AdapterView.OnItem
         listview.setAdapter(adapter);
         listview.setOnItemClickListener(this);
         initBump();
+        if (Helper.getTAG_NICK(this).isEmpty()){
+        	startActivity(new Intent(this, SettingsActivity.class));
+        }
     }
     
     private void initBump(){

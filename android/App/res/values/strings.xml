@@ -12,6 +12,7 @@
     <string name="settings">"Настройки"</string>
     <string name="nick">"Ваш псевдоним :"</string>
     <string name="nick_hint">"псевдоним"</string>
+    <string name="close">"Готово"</string>
     
     
 </resources>
