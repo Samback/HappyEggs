@@ -21,4 +21,5 @@
     #import <FDTake/FDTakeController.h>
     #import <AssetsLibrary/AssetsLibrary.h>
     #import <ALAssetsLibrary-CustomPhotoAlbum/ALAssetsLibrary+CustomPhotoAlbum.h>
+    #import <NYXImagesKit/NYXImagesKit.h>
 #endif

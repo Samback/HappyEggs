@@ -2,6 +2,11 @@
 
 #define DELEGATE ((AppDelegate *)([[UIApplication sharedApplication] delegate]))
 
+#define HEIGHT_IPHONE_5 568
+#define IS_IPHONE_5 ([[UIScreen mainScreen] bounds ].size.height == HEIGHT_IPHONE_5 )
+
+#define TOP_GROUND_IMAGE_NAME (IS_IPHONE_5 ? @"egg_iphone_5" : @"egg_iphone")
+
 #define APP_NAME @"Happy Eggs"
 
 #define BASE_URL @"http://ukr.net"
@@ -21,6 +26,8 @@
 #define YES_MESSAGE NSLocalizedString(@"Да", @"Text Yes")
 
 #define NO_MESSAGE NSLocalizedString(@"Нет", @"Text NO")
+
+
 
 
 #define GA_API_KEY @"UA-38756409-2"

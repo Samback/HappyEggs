@@ -12,7 +12,7 @@
 @implementation HEggCell
 
 #define degreesToRadians(x) (M_PI * (x) / 180.0)
-#define kAnimationRotateDeg 2.0
+#define kAnimationRotateDeg 1.0
 #define kAnimationTranslateX 2.0
 #define kAnimationTranslateY 2.0
 

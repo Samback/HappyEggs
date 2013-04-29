@@ -101,10 +101,14 @@
     NSManagedObjectContext *context = [RKManagedObjectStore defaultStore].mainQueueManagedObjectContext;
     
     [Egg addEggWithName:@"Add egg" background:@"addImage.jpg" couldDelete:NO eggId:0 type:ADD_NEW_EGG_TYPE andContext:context];
-    [Egg addEggWithName:@"first egg" background:@"1.jpg" couldDelete:NO eggId:1 type:DEFAULT_EGG_TYPE andContext:context];
-    [Egg addEggWithName:@"second egg" background:@"2.jpg" couldDelete:NO eggId:2 type:DEFAULT_EGG_TYPE andContext:context];
-    [Egg addEggWithName:@"third egg" background:@"3.jpeg" couldDelete:NO eggId:3 type:DEFAULT_EGG_TYPE andContext:context];   
-    
+    NSString *eggName = nil;
+    NSString *backgroundImageName = nil;
+    for (int i = 1; i <= 10; i++) {
+        eggName = [NSString stringWithFormat:@"Egg name %d", i];
+        backgroundImageName = [NSString stringWithFormat:@"%d.jpg", i];
+        [Egg addEggWithName:eggName background:backgroundImageName couldDelete:NO eggId:1 type:DEFAULT_EGG_TYPE andContext:context];
+    }
+       
 }
 
 

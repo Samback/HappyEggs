@@ -12,11 +12,14 @@
 #import "HEggCell.h"
 #import "SBJson.h"
 
+#define BOTTOM_BACKGROUND_IMAGE_NAME @"bottom_background"
 #define  RADIUS 15
 
 #define TAG_WIN 0
 #define TAG_TIE 1
 #define TAG_LOSE 2
+
+#define SCALED_TIMES 2.0
 
 @interface HEggHomePageVC ()<NSFetchedResultsControllerDelegate, FDTakeDelegate, UIAlertViewDelegate>
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
@@ -31,6 +34,11 @@
 @property (nonatomic) int userAttack;
 @property (nonatomic) int enemyAttack;
 @property (nonatomic, getter = isActiveToFight) BOOL activeToFight;
+
+@property (weak, nonatomic) IBOutlet UIView *tableContainer;
+@property (weak, nonatomic) IBOutlet UIImageView *topSkinn;
+
+
 @end
 
 @implementation HEggHomePageVC
@@ -65,6 +73,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tableContainer.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:BOTTOM_BACKGROUND_IMAGE_NAME]];
+    self.topSkinn.image = [UIImage imageNamed:TOP_GROUND_IMAGE_NAME];
     [self configureBump];
     self.activeToFight = YES;
     self.trackedViewName = @"Home page";
@@ -87,7 +97,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.eggSkinImage.image = [UIImage imageNamed:self.eggOnScreen.background];
+      
+    UIImage *beforeScale = [UIImage imageNamed:self.eggOnScreen.background];
+    UIImage *scaled = [UIImage imageWithCGImage:beforeScale.CGImage scale:SCALED_TIMES orientation:UIImageOrientationUp];
+    UIImage* cropped = [scaled cropToSize:CGSizeMake(200, 262) usingMode:NYXCropModeCenter];
+    self.eggSkinImage.image = cropped;
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -137,8 +152,9 @@
     cell.layer.cornerRadius = RADIUS;
     cell.layer.masksToBounds = YES;
     NSLog(@"Egg background %@", egg.background);
-    cell.eggImage.image = [UIImage imageNamed:egg.background];
-    cell.contentView.backgroundColor = [UIColor redColor];
+    UIImage *reScaled = [UIImage imageWithCGImage:[UIImage imageNamed:egg.background].CGImage scale:SCALED_TIMES orientation:UIImageOrientationUp];
+    UIImage* cropped = [ reScaled cropToSize:CGSizeMake(80, 120) usingMode:NYXCropModeCenter];
+    cell.eggImage.image = cropped;
     return cell;
 }
 
@@ -189,7 +205,11 @@
     NSLog(@"reskin");
     self.activeToFight = YES;
     self.eggOnScreen = newEgg;
-    self.eggSkinImage.image = [UIImage imageNamed:self.eggOnScreen.background];
+    
+    UIImage *beforeScale = [UIImage imageNamed:self.eggOnScreen.background];
+    UIImage *scaled = [UIImage imageWithCGImage:beforeScale.CGImage scale:SCALED_TIMES orientation:UIImageOrientationUp];
+    UIImage* cropped = [scaled cropToSize:CGSizeMake(200, 262) usingMode:NYXCropModeCenter];
+    self.eggSkinImage.image = cropped;
 }
 
 - (void)deleteEggAtIndex:(NSIndexPath *)indexPath
@@ -303,18 +323,18 @@
 
 
 - (void)sendBumpData
-{
-    srandom(time(NULL));    
-    self.userAttack = random() % 100;
-    NSDictionary *dictionary = @{
-                                 @"attack":[NSString stringWithFormat:@"%d", self.userAttack],
-                                 };   
-    
+{  
     
     [[BumpClient sharedClient] setChannelConfirmedBlock:^(BumpChannelID channel) {
         if (self.isActiveToFight) {
             NSLog(@"Channel with %@ confirmed.", [[BumpClient sharedClient] userIDForChannel:channel]);
+            self.userAttack = arc4random() % 100;
+            NSDictionary *dictionary = @{
+                                         @"attack":[NSString stringWithFormat:@"%d", self.userAttack],
+                                         };
+
             NSError *error ;
+            
             
             NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary options:NSJSONWritingPrettyPrinted error:&error];
             if (!error) {
@@ -390,6 +410,20 @@
     else if (alertView.tag == TAG_LOSE) {
         self.activeToFight = NO;
     }
+}
+
+
+-(UIImage*) drawImage:(UIImage*) fgImage
+              inImage:(UIImage*) bgImage
+              atPoint:(CGPoint)  point
+{
+    UIGraphicsBeginImageContextWithOptions(bgImage.size, FALSE, 0.0);
+    [bgImage drawInRect:CGRectMake( 0, 0, bgImage.size.width, bgImage.size.height)];
+    [fgImage drawInRect:CGRectMake( point.x, point.y, fgImage.size.width, fgImage.size.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
 
 
