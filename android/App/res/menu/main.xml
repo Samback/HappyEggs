@@ -5,13 +5,7 @@
         android:showAsAction="always"
         android:title="@string/action_status"
         android:icon="@drawable/ic_action_fail"/>
-    
-    <!-- 
-    <item
-        android:id="@+id/action_refresh"
-        android:showAsAction="ifRoom"
-        android:title="@string/action_refresh"/>
- -->
+
 	<item
 		android:id="@+id/share"
 		android:actionProviderClass="com.actionbarsherlock.widget.ShareActionProvider"
@@ -20,4 +14,20 @@
 		android:showAsAction="always"
 		android:visible="true">
 	</item>
+	<item
+	    android:id="@+id/rating"
+	    android:enabled="true"
+	    android:visible="true"
+	    android:title="@string/rating"
+	    android:showAsAction="never">	    
+	</item>
+	<item
+	    android:id="@+id/settings"
+	    android:enabled="true"
+	    android:visible="true"
+	    android:title="@string/settings"
+	    android:showAsAction="never">	    
+	</item>
+	
+	    
 </menu>

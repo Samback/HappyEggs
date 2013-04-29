@@ -7,18 +7,32 @@
 
 	<ImageView
 	    android:id="@+id/imgEgg"
-	    android:background="@android:color/darker_gray"
+	    android:background="#e4a565"
 	    android:layout_alignParentTop="true"
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"
 	    android:layout_above="@+id/listview" />
-    
-	<com.devsmart.android.ui.HorizontalListView 
+	<ImageView
+	    android:id="@+id/imgBacground"
+	    android:background="@drawable/egg_iphone"
+	    android:layout_alignParentTop="true"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:layout_above="@+id/listview" />
+	<com.devsmart.android.ui.HorizontalListView
+	    android:background="@drawable/bottom_background"
 	    android:id="@+id/listview" 
  	    android:layout_alignParentBottom="true"	  	
 	  	android:layout_width="match_parent"
-	  	android:layout_height="100dp" 
-	  	android:background="#ddd">  
+	  	android:layout_height="100dp" >  
 		
 	</com.devsmart.android.ui.HorizontalListView>
+
+	<ImageView
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_above="@+id/listview"
+	    android:layout_alignParentLeft="true"
+	    android:background="@drawable/bottom_background_line" />
+
 </RelativeLayout>

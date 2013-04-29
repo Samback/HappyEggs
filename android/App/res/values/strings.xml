@@ -8,4 +8,10 @@
 	<string name="share">Share</string>
     <string name="sharesubject">Eggs Fight</string>
     <string name="sharetext">"Check out share text"</string>
+    <string name="rating">"Рейтинг"</string>
+    <string name="settings">"Настройки"</string>
+    <string name="nick">"Ваш псевдоним :"</string>
+    <string name="nick_hint">"псевдоним"</string>
+    
+    
 </resources>

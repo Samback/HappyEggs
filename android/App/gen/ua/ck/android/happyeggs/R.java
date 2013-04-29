@@ -913,17 +913,21 @@ containing a value of this type.
         public static final int abs__textfield_searchview_right_holo_dark=0x7f02006d;
         public static final int abs__textfield_searchview_right_holo_light=0x7f02006e;
         public static final int abs__toast_frame=0x7f02006f;
-        public static final int egg1=0x7f020070;
-        public static final int egg2=0x7f020071;
-        public static final int egg3=0x7f020072;
-        public static final int egg4=0x7f020073;
-        public static final int egg5=0x7f020074;
-        public static final int egg6=0x7f020075;
-        public static final int egg7=0x7f020076;
-        public static final int ic_action_fail=0x7f020077;
-        public static final int ic_action_ok=0x7f020078;
-        public static final int ic_launcher=0x7f020079;
-        public static final int icon=0x7f02007a;
+        public static final int bottom_background=0x7f020070;
+        public static final int bottom_background_line=0x7f020071;
+        public static final int easter=0x7f020072;
+        public static final int egg1=0x7f020073;
+        public static final int egg2=0x7f020074;
+        public static final int egg3=0x7f020075;
+        public static final int egg4=0x7f020076;
+        public static final int egg5=0x7f020077;
+        public static final int egg6=0x7f020078;
+        public static final int egg7=0x7f020079;
+        public static final int egg_iphone=0x7f02007a;
+        public static final int ic_action_fail=0x7f02007b;
+        public static final int ic_action_ok=0x7f02007c;
+        public static final int ic_launcher=0x7f02007d;
+        public static final int icon=0x7f02007e;
     }
     public static final class id {
         public static final int abs__action_bar=0x7f040020;
@@ -965,21 +969,26 @@ containing a value of this type.
         public static final int abs__textButton=0x7f040013;
         public static final int abs__title=0x7f04001b;
         public static final int abs__up=0x7f04000b;
-        public static final int action_status=0x7f040035;
+        public static final int action_status=0x7f040038;
         public static final int disableHome=0x7f040009;
+        public static final int editNick=0x7f040036;
         public static final int edit_query=0x7f040026;
         public static final int homeAsUp=0x7f040006;
-        public static final int imgChooseEgg=0x7f040034;
+        public static final int imgBacground=0x7f040034;
+        public static final int imgChooseEgg=0x7f040037;
         public static final int imgEgg=0x7f040032;
         public static final int listMode=0x7f040002;
         public static final int listview=0x7f040033;
         public static final int normal=0x7f040001;
-        public static final int share=0x7f040036;
+        public static final int rating=0x7f04003a;
+        public static final int settings=0x7f04003b;
+        public static final int share=0x7f040039;
         public static final int showCustom=0x7f040008;
         public static final int showHome=0x7f040005;
         public static final int showTitle=0x7f040007;
         public static final int tabMode=0x7f040003;
         public static final int useLogo=0x7f040004;
+        public static final int webView=0x7f040035;
         public static final int wrap_content=0x7f040000;
     }
     public static final class integer {
@@ -1009,9 +1018,12 @@ containing a value of this type.
         public static final int abs__search_view=0x7f030014;
         public static final int abs__simple_dropdown_hint=0x7f030015;
         public static final int activity_main=0x7f030016;
-        public static final int item_scroll=0x7f030017;
-        public static final int sherlock_spinner_dropdown_item=0x7f030018;
-        public static final int sherlock_spinner_item=0x7f030019;
+        public static final int activity_rating=0x7f030017;
+        public static final int activity_settings=0x7f030018;
+        public static final int activity_splash=0x7f030019;
+        public static final int item_scroll=0x7f03001a;
+        public static final int sherlock_spinner_dropdown_item=0x7f03001b;
+        public static final int sherlock_spinner_item=0x7f03001c;
     }
     public static final class menu {
         public static final int main=0x7f0b0000;
@@ -1061,6 +1073,10 @@ containing a value of this type.
         public static final int app_name=0x7f09000e;
         public static final int ga_trackingId=0x7f09000d;
         public static final int hello_world=0x7f090011;
+        public static final int nick=0x7f090017;
+        public static final int nick_hint=0x7f090018;
+        public static final int rating=0x7f090015;
+        public static final int settings=0x7f090016;
         public static final int share=0x7f090012;
         public static final int sharesubject=0x7f090013;
         public static final int sharetext=0x7f090014;
