@@ -316,6 +316,23 @@ public class MainActivity extends SherlockActivity implements AdapterView.OnItem
 		return true;
 	}
 	
+	
+	
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.settings:
+			startActivity(new Intent(this, SettingsActivity.class));
+			break;
+		case R.id.rating:
+			startActivity(new Intent(this, RatingActivity.class));
+			break;
+		default:
+			break;
+		}
+		return super.onMenuItemSelected(featureId, item);
+	}
+
 	private void shareMenuItem(Menu menu){
 		MenuItem menuItem = menu.findItem(R.id.share);
 		ShareActionProvider mShareActionProvider = (ShareActionProvider) menuItem.getActionProvider();
@@ -325,6 +342,5 @@ public class MainActivity extends SherlockActivity implements AdapterView.OnItem
 		shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.sharesubject));
 		shareIntent.putExtra(Intent.EXTRA_SUBJECT,getString(R.string.sharetext));
 		mShareActionProvider.setShareIntent(shareIntent);
-	}    
-  
+	}   
 }
