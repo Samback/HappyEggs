@@ -63,9 +63,7 @@
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                     <constraints>
                                                                         <constraint firstItem="dSF-XU-gNV" firstAttribute="leading" secondItem="yku-Id-JUZ" secondAttribute="leading" type="default" id="3TC-RA-rO9"/>
-                                                                        <constraint firstItem="dSF-XU-gNV" firstAttribute="trailing" secondItem="yku-Id-JUZ" secondAttribute="trailing" type="default" id="HiA-j9-UTx"/>
                                                                         <constraint firstItem="OAH-1B-zwj" firstAttribute="trailing" secondItem="yku-Id-JUZ" secondAttribute="trailing" type="default" id="Li9-Ha-4p7"/>
-                                                                        <constraint firstItem="dSF-XU-gNV" firstAttribute="bottom" secondItem="yku-Id-JUZ" secondAttribute="bottom" type="default" id="hFw-AD-cz4"/>
                                                                         <constraint firstItem="OAH-1B-zwj" firstAttribute="top" secondItem="yku-Id-JUZ" secondAttribute="top" type="default" id="iEJ-zs-Izb"/>
                                                                         <constraint firstItem="dSF-XU-gNV" firstAttribute="top" secondItem="yku-Id-JUZ" secondAttribute="top" type="default" id="kQq-zg-1hF"/>
                                                                         <constraint firstItem="OAH-1B-zwj" firstAttribute="bottom" secondItem="yku-Id-JUZ" secondAttribute="bottom" type="default" id="lKl-tF-tEu"/>
@@ -77,8 +75,9 @@
                                                         </view>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
-                                                            <constraint firstItem="yku-Id-JUZ" firstAttribute="top" secondItem="YnS-so-6Dn" secondAttribute="top" type="default" id="A8O-AS-b4g"/>
-                                                            <constraint firstItem="yku-Id-JUZ" firstAttribute="bottom" secondItem="YnS-so-6Dn" secondAttribute="bottom" type="default" id="fQ5-75-daJ"/>
+                                                            <constraint firstItem="yku-Id-JUZ" firstAttribute="leading" secondItem="YnS-so-6Dn" secondAttribute="leading" type="default" id="NjF-7Y-Tat"/>
+                                                            <constraint firstItem="yku-Id-JUZ" firstAttribute="top" secondItem="YnS-so-6Dn" secondAttribute="top" type="default" id="RQz-Hk-Gg2"/>
+                                                            <constraint firstItem="yku-Id-JUZ" firstAttribute="bottom" secondItem="YnS-so-6Dn" secondAttribute="bottom" type="default" id="b2J-qA-sb3"/>
                                                             <constraint firstAttribute="trailing" secondItem="yku-Id-JUZ" secondAttribute="trailing" type="user" id="rn8-2Z-vCK"/>
                                                         </constraints>
                                                         <connections>
@@ -247,7 +246,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="small_egg.png" width="80" height="120"/>
+        <image name="small_egg.png" width="80" height="100"/>
     </resources>
     <classes>
         <class className="GAITrackedViewController" superclassName="UIViewController">
