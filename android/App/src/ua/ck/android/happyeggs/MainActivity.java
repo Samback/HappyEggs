@@ -1,9 +1,20 @@
 package ua.ck.android.happyeggs;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -52,6 +63,10 @@ public class MainActivity extends SherlockActivity implements AdapterView.OnItem
 	private boolean bumpStatus; 
 	private  ImageView imgEgg;
 	private AlertDialog.Builder ad;
+	private final String NAME = Helper.getNick(this);
+	private final String UDID  = Helper.getUDID(this);	
+	private final String PLATFORM  = "android";
+	
 	private int myNumber = 0, hisNumber = 0;
 	private int[] images = {R.drawable.egg1,
 							R.drawable.egg2,
@@ -60,6 +75,7 @@ public class MainActivity extends SherlockActivity implements AdapterView.OnItem
 							R.drawable.egg5,
 							R.drawable.egg6,
 							R.drawable.egg7};
+	
 	
 	@Override
     protected void onStart() {
@@ -84,7 +100,7 @@ public class MainActivity extends SherlockActivity implements AdapterView.OnItem
         listview.setAdapter(adapter);
         listview.setOnItemClickListener(this);
         initBump();
-        if (Helper.getTAG_NICK(this).isEmpty()){
+        if (Helper.getNick(this).isEmpty()){
         	startActivity(new Intent(this, SettingsActivity.class));
         }
     }
@@ -112,8 +128,7 @@ public class MainActivity extends SherlockActivity implements AdapterView.OnItem
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-    	return "".getBytes();
-    	
+    	return "".getBytes();    	
     }
     
     private void checkNumber(String data){
@@ -131,6 +146,55 @@ public class MainActivity extends SherlockActivity implements AdapterView.OnItem
     	}catch (JSONException e){
     		e.printStackTrace();
     	}
+    }
+    
+    private void sendReport(String state){
+    	Thread mThread = new Thread(new ReportSender(state));
+    	mThread.start();
+    }
+    
+    private class ReportSender implements Runnable{
+    	private String state;
+    	
+		public ReportSender(String state) {
+			super();
+			this.state = state;
+		}
+
+		@Override
+		public void run() {
+			doPost(state);
+		}
+    }
+    
+    private void doPost(String state ){
+    	String result = new String("");
+    	try{
+    		HttpClient client =  new DefaultHttpClient();
+    		HttpPost post = new HttpPost("http://egg.localhome.in.ua/app/chart/add/"+ UDID);
+    		
+    		List<BasicNameValuePair> pairs = new ArrayList<BasicNameValuePair>();
+            pairs.add(new BasicNameValuePair("state", state));
+            pairs.add(new BasicNameValuePair("name", NAME));
+            pairs.add(new BasicNameValuePair("platform", PLATFORM));
+            post.setEntity(new UrlEncodedFormEntity(pairs));
+    		
+            HttpResponse response = client.execute(post);
+            
+            BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(),"windows-1251"));
+		    StringBuilder sb = new StringBuilder();
+		    String line = null;
+		    while ((line = reader.readLine()) != null) {
+		    	sb.append(line + System.getProperty("line.separator"));
+		    }    
+		    result = sb.toString();            
+    	}catch (org.apache.http.client.ClientProtocolException e) {
+    		e.printStackTrace();
+	    } catch (IOException e) {
+	    	e.printStackTrace();	    
+	    } catch (Exception e) {
+	    	e.printStackTrace();
+	    }
     }
         
     private final BroadcastReceiver receiver = new BroadcastReceiver() {
@@ -190,8 +254,6 @@ public class MainActivity extends SherlockActivity implements AdapterView.OnItem
 		public void onServiceDisconnected(ComponentName name) {}
 	};
 	
-
-    
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		if (position != 0){
@@ -318,8 +380,6 @@ public class MainActivity extends SherlockActivity implements AdapterView.OnItem
 		shareMenuItem(menu);
 		return true;
 	}
-	
-	
 	
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {

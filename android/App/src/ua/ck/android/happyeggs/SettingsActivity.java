@@ -17,7 +17,7 @@ public class SettingsActivity extends SherlockActivity {
 		setContentView(R.layout.activity_settings);
 		editNick = (EditText)findViewById(R.id.editNick);
 		btnClose = (Button)findViewById(R.id.btnClose);
-		editNick.setText(Helper.getTAG_NICK(this));
+		editNick.setText(Helper.getNick(this));
 		btnClose.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -29,9 +29,6 @@ public class SettingsActivity extends SherlockActivity {
 	@Override
 	protected void onStop() {		
 		super.onStop();
-		Helper.setTAG_NICK(editNick.getText().toString(), this);
+		Helper.setNick(editNick.getText().toString(), this);
 	}
-	
-	
-
 }
