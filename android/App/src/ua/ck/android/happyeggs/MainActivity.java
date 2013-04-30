@@ -63,18 +63,20 @@ public class MainActivity extends SherlockActivity implements AdapterView.OnItem
 	private boolean bumpStatus; 
 	private  ImageView imgEgg;
 	private AlertDialog.Builder ad;
-	private final String NAME = Helper.getNick(this);
-	private final String UDID  = Helper.getUDID(this);	
+	private String NAME;
+	private String UDID;	
 	private final String PLATFORM  = "android";
+	private ImageView imgBacground;
 	
 	private int myNumber = 0, hisNumber = 0;
-	private int[] images = {R.drawable.egg1,
-							R.drawable.egg2,
-							R.drawable.egg3,
-							R.drawable.egg4,
-							R.drawable.egg5,
-							R.drawable.egg6,
-							R.drawable.egg7};
+	private int[] images = {R.drawable.e0,
+							R.drawable.e4,
+							R.drawable.e5,
+							R.drawable.e6,
+							R.drawable.e7,
+							R.drawable.e8,
+							R.drawable.e9,
+							R.drawable.e10};
 	
 	
 	@Override
@@ -91,10 +93,12 @@ public class MainActivity extends SherlockActivity implements AdapterView.OnItem
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);        
+        super.onCreate(savedInstanceState);  
+        
         bumpStatus = false;
         setContentView(R.layout.activity_main);
         imgEgg = (ImageView)findViewById(R.id.imgEgg);
+        imgBacground =(ImageView)findViewById(R.id.imgBacground ); 
         HorizontalListView listview = (HorizontalListView) findViewById(R.id.listview);
         ScrollAdapter adapter = new ScrollAdapter(images.length, getApplicationContext(), images);
         listview.setAdapter(adapter);
@@ -137,15 +141,58 @@ public class MainActivity extends SherlockActivity implements AdapterView.OnItem
     		hisNumber = jRoot.optInt(JSON_TAG);
     		Log.i("Numbers: ", "My : " + Integer.toString(myNumber)+" his : "+Integer.toString(hisNumber));
     		if (hisNumber > myNumber){
-    			Toast.makeText(getApplicationContext(), "You lose", Toast.LENGTH_SHORT).show();
+    			sendReport("lose");
+    			showResulDialog(-1);
+    			setBrokenEgg(hisNumber);
+    			//Toast.makeText(getApplicationContext(), "You lose", Toast.LENGTH_SHORT).show();
     		}else if (hisNumber < myNumber){
-    			Toast.makeText(getApplicationContext(), "You Win", Toast.LENGTH_SHORT).show();
+    			sendReport("win");
+    			showResulDialog(1);
+    			//Toast.makeText(getApplicationContext(), "You Win", Toast.LENGTH_SHORT).show();
     		}else{
-    			Toast.makeText(getApplicationContext(), "Tie", Toast.LENGTH_SHORT).show();
+    			sendReport("tie");
+    			showResulDialog(0);
+    			//Toast.makeText(getApplicationContext(), "Tie", Toast.LENGTH_SHORT).show();
     		}
     	}catch (JSONException e){
     		e.printStackTrace();
     	}
+    }
+    
+    private void setBrokenEgg(int power){
+    	if (power > 60){
+        	imgBacground.setBackground(getResources().getDrawable(R.drawable.first_scratch));    		
+    	}else if (power < 30){
+    		imgBacground.setBackground(getResources().getDrawable(R.drawable.second_scratch));
+    	}else{
+    		imgBacground.setBackground(getResources().getDrawable(R.drawable.third_scratch));
+    	}
+    }
+    
+    private void showResulDialog(int res){
+    	AlertDialog.Builder ad;
+    	ad = new AlertDialog.Builder(this);	
+		switch (res) {
+		case 0:
+			ad.setMessage(getResources().getString(R.string.tie));  
+			break;
+		case 1:
+			ad.setMessage(getResources().getString(R.string.win));  
+			break;
+		case -1:
+			ad.setMessage(getResources().getString(R.string.lose));
+			break;
+		default:
+			break;
+		}
+		ad.setCancelable(false);
+		ad.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				imgBacground.setBackground(getResources().getDrawable(R.drawable.egg_iphone));
+			}
+		});
+		ad.show();    	
     }
     
     private void sendReport(String state){
@@ -168,7 +215,10 @@ public class MainActivity extends SherlockActivity implements AdapterView.OnItem
     }
     
     private void doPost(String state ){
-    	String result = new String("");
+    	//String result = new String("");
+    	//Log.i("doPost", "doPost");
+    	NAME = Helper.getNick(getApplicationContext());
+        UDID  = Helper.getUDID(getApplicationContext());
     	try{
     		HttpClient client =  new DefaultHttpClient();
     		HttpPost post = new HttpPost("http://egg.localhome.in.ua/app/chart/add/"+ UDID);
@@ -178,7 +228,7 @@ public class MainActivity extends SherlockActivity implements AdapterView.OnItem
             pairs.add(new BasicNameValuePair("name", NAME));
             pairs.add(new BasicNameValuePair("platform", PLATFORM));
             post.setEntity(new UrlEncodedFormEntity(pairs));
-    		
+    		//Log.i("Sending nick", NAME);
             HttpResponse response = client.execute(post);
             
             BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(),"windows-1251"));
@@ -187,7 +237,7 @@ public class MainActivity extends SherlockActivity implements AdapterView.OnItem
 		    while ((line = reader.readLine()) != null) {
 		    	sb.append(line + System.getProperty("line.separator"));
 		    }    
-		    result = sb.toString();            
+		    //result = sb.toString();            
     	}catch (org.apache.http.client.ClientProtocolException e) {
     		e.printStackTrace();
 	    } catch (IOException e) {
@@ -203,14 +253,14 @@ public class MainActivity extends SherlockActivity implements AdapterView.OnItem
 	        try {
 	        	Log.i(tag,"Recive something");
 	        	if (action.equals(BumpAPIIntents.DATA_RECEIVED)) {
-	        		Toast.makeText(getApplicationContext(), "Received data from: " + api.userIDForChannelID(intent.getLongExtra("channelID", 0)), Toast.LENGTH_SHORT).show();
+	        		//Toast.makeText(getApplicationContext(), "Received data from: " + api.userIDForChannelID(intent.getLongExtra("channelID", 0)), Toast.LENGTH_SHORT).show();
 	                checkNumber(new String(intent.getByteArrayExtra("data")));	  
 	            } else if (action.equals(BumpAPIIntents.MATCHED)) {
-	            	Toast.makeText(getApplicationContext(), "MATCHED", Toast.LENGTH_SHORT).show();
+	            	//Toast.makeText(getApplicationContext(), "MATCHED", Toast.LENGTH_SHORT).show();
 	                api.confirm(intent.getLongExtra("proposedChannelID", 0), true);
 	            } else if (action.equals(BumpAPIIntents.CHANNEL_CONFIRMED)) {	            	
 	            	api.send(intent.getLongExtra("channelID", 0), sendNumber());
-	            	 Toast.makeText(getApplicationContext(), "CHANNEL_CONFIRMED", Toast.LENGTH_SHORT).show();
+	            	//Toast.makeText(getApplicationContext(), "CHANNEL_CONFIRMED", Toast.LENGTH_SHORT).show();
 	            } else if (action.equals(BumpAPIIntents.CONNECTED)) {
 	                api.enableBumping();
 	                bumpStatus = true;
@@ -219,7 +269,7 @@ public class MainActivity extends SherlockActivity implements AdapterView.OnItem
 	                Toast.makeText(getApplicationContext(), "CONNECTED", Toast.LENGTH_SHORT).show();
 	            } else{
 	            	Log.i(tag,"Get this action: "+action.toString());
-	            	Toast.makeText(getApplicationContext(), "No contact, try again", Toast.LENGTH_SHORT).show();		            
+	            	//Toast.makeText(getApplicationContext(), "No contact, try again", Toast.LENGTH_SHORT).show();		            
 	            }	            
 	        } catch (RemoteException e) {
 	        	e.printStackTrace();
@@ -237,8 +287,8 @@ public class MainActivity extends SherlockActivity implements AdapterView.OnItem
 					public void run() {
 						try{
 							Log.i(tag,"Inner Try! before api.configured");							
-							api.configure("8cdf424bb78349c6bfafb9f22f2788a4", "Cheb");							
-							//api.configure("de703e6680454adbbf3d1ac99727c9b0", "Cheb1");//Max ID
+							//api.configure("8cdf424bb78349c6bfafb9f22f2788a4", "Cheb");							
+							api.configure("de703e6680454adbbf3d1ac99727c9b0", "Cheb");//Max ID
 							//api.configure("004d36464fba4d8a99db91ab389929c7", "Cheb");//New Cheb ID
 							//api.configure("b00609a8b2f143edba70f8e0bee2754e", "Cheb");//Old ChebID
 							Log.i(tag,"Inner Try! after api.configured");
@@ -258,7 +308,7 @@ public class MainActivity extends SherlockActivity implements AdapterView.OnItem
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		if (position != 0){
 			BitmapFactory.Options o2 = new BitmapFactory.Options();
-	    	o2.inSampleSize=5;
+	    	o2.inSampleSize=1;
 	    	Bitmap bm = BitmapFactory.decodeResource(getResources(), images[position], o2);
 	    	imgEgg.setImageBitmap(bm);
 		}else{
@@ -283,9 +333,8 @@ public class MainActivity extends SherlockActivity implements AdapterView.OnItem
 				openGallery();
 			}
 		});
-		ad.show();
-		
-		}
+		ad.show();		
+	}
 	
 	private void openCamera(){
 	Log.i("Opt","Camera");
