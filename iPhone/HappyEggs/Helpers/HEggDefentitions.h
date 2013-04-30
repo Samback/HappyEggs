@@ -9,7 +9,10 @@
 
 #define APP_NAME @"Happy Eggs"
 
-#define BASE_URL @"http://ukr.net"
+#define BASE_URL @"http://egg.localhome.in.ua"
+#define POST_TAIL_URL @"/app/chart/add/"
+#define CHART_TAIL_URL @"/app/chart/list/"
+
 #define BUMP_API_KEY @"de703e6680454adbbf3d1ac99727c9b0"
 #define VK_APP_ID @"3592400"
 
@@ -23,15 +26,20 @@
 #define LOSE_MESSAGE NSLocalizedString(@"Жаль, вы проиграли, возможно выберите другое яйцо и попробуте еще?", @"Lose")
 #define TIE_MESSAGE  NSLocalizedString(@"Вот это да! Оба яйца сварили так круто, что ни одно не разбилось!", @"Tie")
 
+#define UNSUPORTED_SCHEME_ERROR @"Sorry, this device doesn't support this feature"
+#define WEBVIEW_LOADING_ERROR @"Sorry, some problems with the server occured. Please try again later."
+
 #define YES_MESSAGE NSLocalizedString(@"Да", @"Text Yes")
 
 #define NO_MESSAGE NSLocalizedString(@"Нет", @"Text NO")
 
-
+#define USERNAME_KEY @"username"
+#define UUID @"uuid"
 
 
 #define GA_API_KEY @"UA-38756409-2"
 #define TIME_OF_GA_UPDATE 10
+#define CHILD_BROWSER @"Open statistic"
 
 #define ATTACK_KEY @"attack"
 

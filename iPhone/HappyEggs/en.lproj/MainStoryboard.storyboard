@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="tLu-Mi-hUz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="tLu-Mi-hUz">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -16,19 +16,22 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N90-gj-NqQ">
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RJw-E8-jN9"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RJw-E8-jN9">
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="200" id="nyv-jK-1tY"/>
+                                                </constraints>
+                                            </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Mz-Uf-SFf" userLabel="Egg_Top"/>
                                         </subviews>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="RJw-E8-jN9" firstAttribute="bottom" secondItem="N90-gj-NqQ" secondAttribute="bottom" type="default" id="Ojr-oP-5c2"/>
+                                            <constraint firstAttribute="centerX" secondItem="RJw-E8-jN9" secondAttribute="centerX" type="user" id="Syj-6a-ckr"/>
                                             <constraint firstItem="3Mz-Uf-SFf" firstAttribute="top" secondItem="N90-gj-NqQ" secondAttribute="top" type="default" id="Vj5-IW-mfl"/>
                                             <constraint firstItem="3Mz-Uf-SFf" firstAttribute="bottom" secondItem="N90-gj-NqQ" secondAttribute="bottom" type="default" id="Y1J-If-MGV"/>
                                             <constraint firstItem="RJw-E8-jN9" firstAttribute="top" secondItem="N90-gj-NqQ" secondAttribute="top" type="default" id="Zgb-R7-Moq"/>
-                                            <constraint firstItem="RJw-E8-jN9" firstAttribute="leading" secondItem="N90-gj-NqQ" secondAttribute="leading" type="default" id="gc6-Q1-9jB"/>
+                                            <constraint firstItem="RJw-E8-jN9" firstAttribute="centerX" secondItem="3Mz-Uf-SFf" secondAttribute="centerX" type="default" id="eap-ix-uF9"/>
                                             <constraint firstItem="3Mz-Uf-SFf" firstAttribute="leading" secondItem="N90-gj-NqQ" secondAttribute="leading" type="default" id="i8N-fw-npz"/>
-                                            <constraint firstItem="3Mz-Uf-SFf" firstAttribute="trailing" secondItem="N90-gj-NqQ" secondAttribute="trailing" type="default" id="p1M-FT-bAQ"/>
-                                            <constraint firstItem="RJw-E8-jN9" firstAttribute="trailing" secondItem="N90-gj-NqQ" secondAttribute="trailing" type="default" id="q8A-YE-4Wz"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qmc-ll-lp6" userLabel="TableContainer">
@@ -127,6 +130,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="7Ds-a8-QYY">
+                        <barButtonItem key="leftBarButtonItem" systemItem="reply" id="hYM-bo-Ddf">
+                            <connections>
+                                <action selector="openStatistic:" destination="ejY-Dg-1GZ" id="C19-ww-AWG"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="action" id="zT7-OJ-ufV">
                             <connections>
                                 <action selector="shareWithFriends:" destination="ejY-Dg-1GZ" id="FRS-Qd-dQq"/>
@@ -172,6 +180,70 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JD3-9l-jzJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="126" y="18"/>
+        </scene>
+        <!--Child Browser View Controller-->
+        <scene sceneID="nrc-x0-axd">
+            <objects>
+                <viewController storyboardIdentifier="LBChildBrowserViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Q3a-BI-1hv" customClass="LBChildBrowserViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fwG-Q8-vRq">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackOpaque" translatesAutoresizingMaskIntoConstraints="NO" id="HkX-6g-TzK">
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="H5i-5w-nXD"/>
+                                    <barButtonItem title="Done" id="K7L-rO-kcU">
+                                        <connections>
+                                            <action selector="doneClick:" destination="Q3a-BI-1hv" id="kgu-vk-hEV"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z6S-qy-gyl">
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="WVQ-SC-OXG"/>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackOpaque" translatesAutoresizingMaskIntoConstraints="NO" id="HB0-bz-Hge">
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="7IF-O3-CmY"/>
+                                    <barButtonItem systemItem="refresh" id="t7Z-g9-awx">
+                                        <connections>
+                                            <action selector="refreshScreen:" destination="Q3a-BI-1hv" id="GIv-eq-ldo"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="UoS-FG-74B"/>
+                                    <barButtonItem systemItem="action" id="3PQ-IC-AdS">
+                                        <connections>
+                                            <action selector="openURLOnSafari:" destination="Q3a-BI-1hv" id="ptP-4b-jvv"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="HB0-bz-Hge" firstAttribute="bottom" secondItem="fwG-Q8-vRq" secondAttribute="bottom" type="default" id="0ZP-ZB-3Oe"/>
+                            <constraint firstItem="HB0-bz-Hge" firstAttribute="trailing" secondItem="fwG-Q8-vRq" secondAttribute="trailing" type="default" id="1gu-Dd-pVr"/>
+                            <constraint firstItem="HkX-6g-TzK" firstAttribute="trailing" secondItem="fwG-Q8-vRq" secondAttribute="trailing" type="default" id="7jW-0P-nT5"/>
+                            <constraint firstItem="HB0-bz-Hge" firstAttribute="centerX" secondItem="WVQ-SC-OXG" secondAttribute="centerX" type="default" id="CsA-wb-3gQ"/>
+                            <constraint firstItem="HB0-bz-Hge" firstAttribute="leading" secondItem="fwG-Q8-vRq" secondAttribute="leading" type="default" id="KFj-uC-UfK"/>
+                            <constraint firstItem="WVQ-SC-OXG" firstAttribute="centerY" secondItem="z6S-qy-gyl" secondAttribute="centerY" type="default" id="NOU-Up-yPy"/>
+                            <constraint firstItem="HkX-6g-TzK" firstAttribute="leading" secondItem="fwG-Q8-vRq" secondAttribute="leading" type="default" id="PO0-ah-PSv"/>
+                            <constraint firstItem="z6S-qy-gyl" firstAttribute="top" secondItem="HkX-6g-TzK" secondAttribute="bottom" type="default" id="S6C-XO-VCu"/>
+                            <constraint firstItem="z6S-qy-gyl" firstAttribute="leading" secondItem="fwG-Q8-vRq" secondAttribute="leading" type="default" id="Ta6-ds-gcw"/>
+                            <constraint firstItem="HkX-6g-TzK" firstAttribute="top" secondItem="fwG-Q8-vRq" secondAttribute="top" type="default" id="goP-3p-Ppg"/>
+                            <constraint firstItem="z6S-qy-gyl" firstAttribute="bottom" secondItem="fwG-Q8-vRq" secondAttribute="bottom" type="default" id="jxW-x3-dKm"/>
+                            <constraint firstItem="z6S-qy-gyl" firstAttribute="trailing" secondItem="fwG-Q8-vRq" secondAttribute="trailing" type="default" id="vQh-eJ-nGc"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="currentWebPage" destination="z6S-qy-gyl" id="k5Y-Dk-p5T"/>
+                        <outlet property="spinner" destination="WVQ-SC-OXG" id="Z9Q-jQ-lPJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SLJ-KF-xfe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="661" y="-657"/>
         </scene>
     </scenes>
     <resources>

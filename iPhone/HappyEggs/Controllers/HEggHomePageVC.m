@@ -11,6 +11,7 @@
 #import "Egg.h"
 #import "HEggCell.h"
 #import "SBJson.h"
+#import "LBChildBrowserViewController.h"
 
 #define BOTTOM_BACKGROUND_IMAGE_NAME @"bottom_background"
 #define  RADIUS 15
@@ -24,7 +25,7 @@
 @interface HEggHomePageVC ()<NSFetchedResultsControllerDelegate, FDTakeDelegate, UIAlertViewDelegate>
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (weak, nonatomic) IBOutlet UICollectionView *eggsList;
-@property (nonatomic, strong) REActivityViewController *activityViewController;
+//@property (nonatomic, strong) REActivityViewController *activityViewController;
 @property (nonatomic) NSInteger numberOfUniqeEggs;
 @property (nonatomic, strong) FDTakeController *takeController;
 @property (nonatomic, strong) UIAlertView *deleteEggAlert;
@@ -44,31 +45,31 @@
 @implementation HEggHomePageVC
 #pragma mark - Lazy instantiation
 
-- (REActivityViewController *)activityViewController{
-    if (!_activityViewController) {
-        REFacebookActivity *facebookActivity = [[REFacebookActivity alloc] init];
-        RETwitterActivity *twitterActivity = [[RETwitterActivity alloc] init];
-        REVKActivity *vkActivity = [[REVKActivity alloc] initWithClientId:VK_APP_ID];
-        // Compile activities into an array, we will pass that array to
-        // REActivityViewController on the next step
-        //
-        NSArray *activities = @[facebookActivity, twitterActivity, vkActivity];
-        
-        // Create REActivityViewController controller and assign data source
-        //
-        REActivityViewController *activityViewController = [[REActivityViewController alloc] initWithViewController:self activities:activities];
-        
-        activityViewController.userInfo = @{
-                                          //  @"image": [UIImage imageNamed:SHARING_IMAGE],
-                                            @"text": SHARING_TEXT,
-                                            @"url": [NSURL URLWithString:SHARING_URL_FOR_APP],
-                                            };
-
-        _activityViewController = activityViewController;
-    }
-    return _activityViewController;
-}
-
+//- (REActivityViewController *)activityViewController{
+//    if (!_activityViewController) {
+//        REFacebookActivity *facebookActivity = [[REFacebookActivity alloc] init];
+//        RETwitterActivity *twitterActivity = [[RETwitterActivity alloc] init];
+//        REVKActivity *vkActivity = [[REVKActivity alloc] initWithClientId:VK_APP_ID];
+//        // Compile activities into an array, we will pass that array to
+//        // REActivityViewController on the next step
+//        //
+//        NSArray *activities = @[facebookActivity, twitterActivity, vkActivity];
+//        
+//        // Create REActivityViewController controller and assign data source
+//        //
+//        REActivityViewController *activityViewController = [[REActivityViewController alloc] initWithViewController:self activities:activities];
+//        
+//        activityViewController.userInfo = @{
+//                                          //  @"image": [UIImage imageNamed:SHARING_IMAGE],
+//                                            @"text": SHARING_TEXT,
+//                                            @"url": [NSURL URLWithString:SHARING_URL_FOR_APP],
+//                                            };
+//
+//        _activityViewController = activityViewController;
+//    }
+//    return _activityViewController;
+//}
+//
 
 - (void)viewDidLoad
 {
@@ -265,10 +266,10 @@
 
 #pragma mark - Sharing metods
 
-- (IBAction)shareWithFriends:(UIBarButtonItem *)sender {
-    [self.activityViewController presentFromRootViewController];
-}
-
+//- (IBAction)shareWithFriends:(UIBarButtonItem *)sender {
+//    [self.activityViewController presentFromRootViewController];
+//}
+//
 
 
 - (void)stopJigglingOnCollection
@@ -276,6 +277,16 @@
 [self.eggsList.visibleCells makeObjectsPerformSelector:@selector(stopJiggling)];
 }
 
+
+#pragma mark - Open Statistci
+
+- (IBAction)openStatistic:(UIBarButtonItem *)sender {
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    LBChildBrowserViewController *browser = [mainStoryboard instantiateViewControllerWithIdentifier:@"LBChildBrowserViewController"];
+    NSString *chartURL = [NSString stringWithFormat:@"%@%@%@", BASE_URL, CHART_TAIL_URL, [HEggHelperMethods getUUID]];
+    [browser setCurrentURL:chartURL];
+    [self presentViewController:browser animated:YES completion:NULL];
+}
 
 #pragma mark - BUMP methods
 - (void) configureBump {
@@ -365,19 +376,24 @@
 - (void)showResults
 {
     self.activeToFight = NO;
+    NSString *result = @"win";
     if (self.userAttack > self.enemyAttack) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:APP_NAME message:WIN_MESSAGE delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
         alert.tag = TAG_WIN;
+        result = @"win";
         [alert show];
     }
     else if (self.userAttack == self.enemyAttack){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:APP_NAME message:TIE_MESSAGE delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
+        result = @"tie";
         [alert show];
     }
     else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:APP_NAME message:LOSE_MESSAGE delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
+        result = @"lose";
         [alert show];     
-    }    
+    }
+    [self sendPostWithResults:result];
 }
 
 - (void)crackAnimation
@@ -424,6 +440,30 @@
     UIGraphicsEndImageContext();
     
     return newImage;
+}
+
+
+- (void)sendPostWithResults:(NSString *)fightResult
+{
+    NSString *path = [NSString stringWithFormat:@"%@%@%@", BASE_URL, POST_TAIL_URL, [HEggHelperMethods getUUID]];
+    NSURL *url = [NSURL URLWithString:path];
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
+    NSDictionary *postParameters = @{
+                                     @"state" : fightResult,
+                                     @"name"  : [HEggHelperMethods userNickName],
+                                     @"platform" : @"ios"
+                                     };
+    NSMutableURLRequest *request = [httpClient multipartFormRequestWithMethod:@"POST" path:nil parameters:postParameters constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
+     }];
+    AFJSONRequestOperation *operation =
+    [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
+                                                        NSLog(@"Success result %@", (NSDictionary *)JSON);
+                                                    }
+                                                    failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                                                        NSLog(@"Request Error [%@] JSon =   %@", [error localizedDescription],(NSDictionary *)JSON);
+                                                    }];
+        [operation start];
 }
 
 

@@ -15,11 +15,13 @@
     #import <RestKit/RestKit.h>
     #import "HEggDefentitions.h"
     #import "BumpClient.h"
-    #import <REActivityViewController/REActivityViewController.h>
+//    #import <REActivityViewController/REActivityViewController.h>
     #import "GAI.h"
     #import "GAITrackedViewController.h"
     #import <FDTake/FDTakeController.h>
     #import <AssetsLibrary/AssetsLibrary.h>
     #import <ALAssetsLibrary-CustomPhotoAlbum/ALAssetsLibrary+CustomPhotoAlbum.h>
     #import <NYXImagesKit/NYXImagesKit.h>
+    #import "HEggHelperMethods.h"
+    #import <AFNetworking/AFHTTPClient.h>
 #endif

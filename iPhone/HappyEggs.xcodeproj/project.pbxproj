@@ -63,6 +63,8 @@
 		509447CC172F1DE70091E08E /* 9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 509447C2172F1DE70091E08E /* 9.jpg */; };
 		509447CD172F1DE70091E08E /* 10.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 509447C3172F1DE70091E08E /* 10.jpg */; };
 		509447D2172F27C30091E08E /* scratch_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 509447D1172F27C30091E08E /* scratch_1.png */; };
+		50ED8C96172FD75500F70A80 /* HEggHelperMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ED8C95172FD75500F70A80 /* HEggHelperMethods.m */; };
+		50ED8C99172FD94500F70A80 /* LBChildBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ED8C98172FD94500F70A80 /* LBChildBrowserViewController.m */; };
 		75F3CF02B979483AB4CF104A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 377EB22FE51948FEA10C8E6A /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -153,6 +155,10 @@
 		509447C2172F1DE70091E08E /* 9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 9.jpg; sourceTree = "<group>"; };
 		509447C3172F1DE70091E08E /* 10.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 10.jpg; sourceTree = "<group>"; };
 		509447D1172F27C30091E08E /* scratch_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scratch_1.png; sourceTree = "<group>"; };
+		50ED8C94172FD75500F70A80 /* HEggHelperMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HEggHelperMethods.h; path = HappyEggs/Helpers/HEggHelperMethods.h; sourceTree = "<group>"; };
+		50ED8C95172FD75500F70A80 /* HEggHelperMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HEggHelperMethods.m; path = HappyEggs/Helpers/HEggHelperMethods.m; sourceTree = "<group>"; };
+		50ED8C97172FD94400F70A80 /* LBChildBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LBChildBrowserViewController.h; path = HappyEggs/Controllers/LBChildBrowserViewController.h; sourceTree = "<group>"; };
+		50ED8C98172FD94500F70A80 /* LBChildBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LBChildBrowserViewController.m; path = HappyEggs/Controllers/LBChildBrowserViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,8 +202,6 @@
 		501B04461723A70D00F9A5AD = {
 			isa = PBXGroup;
 			children = (
-				5016B2A817246FB200A83CD8 /* QuartzCore.framework */,
-				5016B2A6172461E400A83CD8 /* AssetsLibrary.framework */,
 				5016B29A1724012A00A83CD8 /* GA */,
 				509019981723C64A00902DEB /* Controllers */,
 				509019551723AE7A00902DEB /* Helpers */,
@@ -222,6 +226,8 @@
 		501B04511723A70D00F9A5AD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5016B2A817246FB200A83CD8 /* QuartzCore.framework */,
+				5016B2A6172461E400A83CD8 /* AssetsLibrary.framework */,
 				5090196C1723C1BA00902DEB /* AudioToolbox.framework */,
 				5090196A1723C1AC00902DEB /* CoreLocation.framework */,
 				509019681723C1A600902DEB /* CFNetwork.framework */,
@@ -297,6 +303,8 @@
 			isa = PBXGroup;
 			children = (
 				509019541723AE5800902DEB /* HEggDefentitions.h */,
+				50ED8C94172FD75500F70A80 /* HEggHelperMethods.h */,
+				50ED8C95172FD75500F70A80 /* HEggHelperMethods.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -374,6 +382,8 @@
 		509019981723C64A00902DEB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				50ED8C97172FD94400F70A80 /* LBChildBrowserViewController.h */,
+				50ED8C98172FD94500F70A80 /* LBChildBrowserViewController.m */,
 				5090195A1723AFC300902DEB /* HEggHomePageVC.h */,
 				5090195B1723AFC300902DEB /* HEggHomePageVC.m */,
 			);
@@ -546,6 +556,8 @@
 				509019951723C62000902DEB /* SBJsonTokeniser.m in Sources */,
 				509019961723C62000902DEB /* SBJsonUTF8Stream.m in Sources */,
 				509019971723C62000902DEB /* SBJsonWriter.m in Sources */,
+				50ED8C96172FD75500F70A80 /* HEggHelperMethods.m in Sources */,
+				50ED8C99172FD94500F70A80 /* LBChildBrowserViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,6 +1,6 @@
 platform :ios , '6.0'
 pod 'RestKit', '~> 0.20.0pre6'
-pod 'REActivityViewController', '~> 1.5'
 pod 'FDTake', '~> 0.0.2'
 pod 'ALAssetsLibrary-CustomPhotoAlbum', '~> 1.0.1'
 pod 'NYXImagesKit'
+pod 'REActivityViewController', '~> 1.5'
