@@ -114,7 +114,7 @@
                                                        [NSBundle bundleWithIdentifier:@"FDTakeTranslations"],
                                                        @"There are no sources available to select a photo");
     NSLog(@"%@", str);
-    self.eggOnScreen = [self.fetchedResultsController fetchedObjects][1];
+    self.eggOnScreen = [self.fetchedResultsController fetchedObjects][0];
 
 }
 
