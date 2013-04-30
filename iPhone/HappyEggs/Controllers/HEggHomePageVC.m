@@ -39,11 +39,34 @@
 @property (weak, nonatomic) IBOutlet UIView *tableContainer;
 @property (weak, nonatomic) IBOutlet UIImageView *topSkinn;
 
+@property (nonatomic, strong) NSArray *scratchArray;
 
 @end
 
 @implementation HEggHomePageVC
 #pragma mark - Lazy instantiation
+
+- (NSArray *)scratchArray
+{
+    if (!_scratchArray) {
+        if (IS_IPHONE_5) {
+            _scratchArray = @[
+                              @"first_scratch_iphone_5",
+                              @"second_scratch_iphone_5",
+                              @"third_scratch_iphone_5"
+                              ];
+        }
+        else {
+            _scratchArray = @[
+                              @"first_scratch",
+                              @"second_scratch",
+                              @"third_scratch"
+                              ];
+        }
+    }
+    return _scratchArray;
+}
+
 
 - (REActivityViewController *)activityViewController{
     if (!_activityViewController) {
@@ -206,7 +229,7 @@
     NSLog(@"reskin");
     self.activeToFight = YES;
     self.eggOnScreen = newEgg;
-    
+    self.topSkinn.image = [UIImage imageNamed:TOP_GROUND_IMAGE_NAME];
     UIImage *beforeScale = [UIImage imageNamed:self.eggOnScreen.background];
     UIImage *scaled = [UIImage imageWithCGImage:beforeScale.CGImage scale:SCALED_TIMES orientation:UIImageOrientationUp];
     UIImage* cropped = [scaled cropToSize:CGSizeMake(200, 262) usingMode:NYXCropModeCenter];
@@ -391,7 +414,11 @@
     else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:APP_NAME message:LOSE_MESSAGE delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
         result = @"lose";
-        [alert show];     
+        [alert show];
+        int numberOfElements = self.scratchArray.count;
+        int position = arc4random() % numberOfElements;
+        UIImage *scratchImage = [UIImage imageNamed:self.scratchArray[position%numberOfElements]];
+        self.topSkinn.image = scratchImage;
     }
     [self sendPostWithResults:result];
 }
