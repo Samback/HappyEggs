@@ -15,7 +15,7 @@
     #import <RestKit/RestKit.h>
     #import "HEggDefentitions.h"
     #import "BumpClient.h"
-//    #import <REActivityViewController/REActivityViewController.h>
+    #import <REActivityViewController/REActivityViewController.h>
     #import "GAI.h"
     #import "GAITrackedViewController.h"
     #import <FDTake/FDTakeController.h>

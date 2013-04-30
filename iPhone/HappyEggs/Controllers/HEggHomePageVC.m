@@ -25,7 +25,7 @@
 @interface HEggHomePageVC ()<NSFetchedResultsControllerDelegate, FDTakeDelegate, UIAlertViewDelegate>
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (weak, nonatomic) IBOutlet UICollectionView *eggsList;
-//@property (nonatomic, strong) REActivityViewController *activityViewController;
+@property (nonatomic, strong) REActivityViewController *activityViewController;
 @property (nonatomic) NSInteger numberOfUniqeEggs;
 @property (nonatomic, strong) FDTakeController *takeController;
 @property (nonatomic, strong) UIAlertView *deleteEggAlert;
@@ -45,31 +45,31 @@
 @implementation HEggHomePageVC
 #pragma mark - Lazy instantiation
 
-//- (REActivityViewController *)activityViewController{
-//    if (!_activityViewController) {
-//        REFacebookActivity *facebookActivity = [[REFacebookActivity alloc] init];
-//        RETwitterActivity *twitterActivity = [[RETwitterActivity alloc] init];
-//        REVKActivity *vkActivity = [[REVKActivity alloc] initWithClientId:VK_APP_ID];
-//        // Compile activities into an array, we will pass that array to
-//        // REActivityViewController on the next step
-//        //
-//        NSArray *activities = @[facebookActivity, twitterActivity, vkActivity];
-//        
-//        // Create REActivityViewController controller and assign data source
-//        //
-//        REActivityViewController *activityViewController = [[REActivityViewController alloc] initWithViewController:self activities:activities];
-//        
-//        activityViewController.userInfo = @{
-//                                          //  @"image": [UIImage imageNamed:SHARING_IMAGE],
-//                                            @"text": SHARING_TEXT,
-//                                            @"url": [NSURL URLWithString:SHARING_URL_FOR_APP],
-//                                            };
-//
-//        _activityViewController = activityViewController;
-//    }
-//    return _activityViewController;
-//}
-//
+- (REActivityViewController *)activityViewController{
+    if (!_activityViewController) {
+        REFacebookActivity *facebookActivity = [[REFacebookActivity alloc] init];
+        RETwitterActivity *twitterActivity = [[RETwitterActivity alloc] init];
+        REVKActivity *vkActivity = [[REVKActivity alloc] initWithClientId:VK_APP_ID];
+        // Compile activities into an array, we will pass that array to
+        // REActivityViewController on the next step
+        //
+        NSArray *activities = @[facebookActivity, twitterActivity, vkActivity];
+        
+        // Create REActivityViewController controller and assign data source
+        //
+        REActivityViewController *activityViewController = [[REActivityViewController alloc] initWithViewController:self activities:activities];
+        
+        activityViewController.userInfo = @{
+                                          //  @"image": [UIImage imageNamed:SHARING_IMAGE],
+                                            @"text": SHARING_TEXT,
+                                            @"url": [NSURL URLWithString:SHARING_URL_FOR_APP],
+                                            };
+
+        _activityViewController = activityViewController;
+    }
+    return _activityViewController;
+}
+
 
 - (void)viewDidLoad
 {
@@ -266,10 +266,10 @@
 
 #pragma mark - Sharing metods
 
-//- (IBAction)shareWithFriends:(UIBarButtonItem *)sender {
-//    [self.activityViewController presentFromRootViewController];
-//}
-//
+- (IBAction)shareWithFriends:(UIBarButtonItem *)sender {
+    [self.activityViewController presentFromRootViewController];
+}
+
 
 
 - (void)stopJigglingOnCollection
