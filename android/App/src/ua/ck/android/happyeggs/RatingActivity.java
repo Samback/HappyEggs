@@ -13,6 +13,8 @@ public class RatingActivity extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_rating);
 		webView = (WebView)findViewById(R.id.webView);
-		webView.loadUrl("http://android.ck.ua");
+		//http://egg.localhome.in.ua/app/chart/list/{udid}
+		//webView.loadUrl("http://android.ck.ua");
+		webView.loadUrl("http://egg.localhome.in.ua/app/chart/list/"+Helper.getUDID(this));
 	}
 }
