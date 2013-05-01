@@ -89,7 +89,7 @@
 		5016B2A01724012A00A83CD8 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
 		5016B2A6172461E400A83CD8 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		5016B2A817246FB200A83CD8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		501B044F1723A70D00F9A5AD /* HappyEggs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyEggs.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		501B044F1723A70D00F9A5AD /* Happy Eggs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Happy Eggs.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		501B04521723A70D00F9A5AD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		501B04541723A70D00F9A5AD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		501B04561723A70D00F9A5AD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -245,7 +245,7 @@
 		501B04501723A70D00F9A5AD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				501B044F1723A70D00F9A5AD /* HappyEggs.app */,
+				501B044F1723A70D00F9A5AD /* Happy Eggs.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -485,7 +485,7 @@
 			);
 			name = "Happy Eggs";
 			productName = HappyEggs;
-			productReference = 501B044F1723A70D00F9A5AD /* HappyEggs.app */;
+			productReference = 501B044F1723A70D00F9A5AD /* Happy Eggs.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -697,6 +697,7 @@
 					"\"$(SRCROOT)/GA\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -705,6 +706,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4E2C87221EE34C45A3CA97EC /* Pods.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HappyEggs/HappyEggs-Prefix.pch";
 				INFOPLIST_FILE = "HappyEggs/HappyEggs-Info.plist";
@@ -715,6 +718,9 @@
 					"\"$(SRCROOT)/GA\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

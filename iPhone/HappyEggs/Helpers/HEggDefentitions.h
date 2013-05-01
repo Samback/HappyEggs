@@ -1,5 +1,6 @@
 #import "AppDelegate.h"
 
+#define NSLog(...)
 #define DELEGATE ((AppDelegate *)([[UIApplication sharedApplication] delegate]))
 
 #define HEIGHT_IPHONE_5 568
