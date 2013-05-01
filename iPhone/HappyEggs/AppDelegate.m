@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "HEggLoginVC.h"
+#import "HEggHomePageVC.h"
 #import "Egg.h"
 
 @implementation AppDelegate
@@ -17,6 +19,13 @@
     [self initSourceInCoreData];
     [self initBump];
     [self initGA];
+    if ([HEggHelperMethods userNickName]) {
+        [self makeMainMenuAsRootController];
+    }
+    else {
+        [self makeLoginAsRootController];
+    }
+
     // Override point for customization after application launch.
     return YES;
 }
@@ -48,6 +57,22 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (void)makeLoginAsRootController
+{
+    [self makeRootControllerWithIdentifier:@"HEggLoginVC"];
+}
+
+- (void)makeMainMenuAsRootController
+{
+    [self makeRootControllerWithIdentifier:@"MyNavigationController"];
+}
+
+
+- (void)makeRootControllerWithIdentifier:(NSString *)identifier
+{
+    UIViewController *view = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:identifier];
+    self.window.rootViewController = view;
+}
 
 #pragma mark - Restkit config
 - (void)initRestKitWithCoreDataIntegration{

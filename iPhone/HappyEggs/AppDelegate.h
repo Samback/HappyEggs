@@ -14,5 +14,6 @@
 @property (nonatomic, strong) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, strong) RKManagedObjectStore *managedObjectStore;
 
+- (void)makeMainMenuAsRootController;
 
 @end

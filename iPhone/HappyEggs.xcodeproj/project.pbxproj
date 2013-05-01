@@ -71,6 +71,8 @@
 		50944FA6173082200091E08E /* 6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 50944F9E173082200091E08E /* 6.jpg */; };
 		50944FA7173082200091E08E /* 7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 50944F9F173082200091E08E /* 7.jpg */; };
 		50944FA8173082200091E08E /* 8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 50944FA0173082200091E08E /* 8.jpg */; };
+		50944FAC173094530091E08E /* HEggLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 50944FAB173094530091E08E /* HEggLoginVC.m */; };
+		50944FAE1730A0DE0091E08E /* splash_background_5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50944FAD1730A0DE0091E08E /* splash_background_5@2x.png */; };
 		50ED8C96172FD75500F70A80 /* HEggHelperMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ED8C95172FD75500F70A80 /* HEggHelperMethods.m */; };
 		50ED8C99172FD94500F70A80 /* LBChildBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ED8C98172FD94500F70A80 /* LBChildBrowserViewController.m */; };
 		75F3CF02B979483AB4CF104A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 377EB22FE51948FEA10C8E6A /* libPods.a */; };
@@ -174,6 +176,9 @@
 		50944F9E173082200091E08E /* 6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 6.jpg; sourceTree = "<group>"; };
 		50944F9F173082200091E08E /* 7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 7.jpg; sourceTree = "<group>"; };
 		50944FA0173082200091E08E /* 8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 8.jpg; sourceTree = "<group>"; };
+		50944FAA173094530091E08E /* HEggLoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HEggLoginVC.h; path = HappyEggs/Controllers/HEggLoginVC.h; sourceTree = "<group>"; };
+		50944FAB173094530091E08E /* HEggLoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HEggLoginVC.m; path = HappyEggs/Controllers/HEggLoginVC.m; sourceTree = "<group>"; };
+		50944FAD1730A0DE0091E08E /* splash_background_5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splash_background_5@2x.png"; sourceTree = "<group>"; };
 		50ED8C94172FD75500F70A80 /* HEggHelperMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HEggHelperMethods.h; path = HappyEggs/Helpers/HEggHelperMethods.h; sourceTree = "<group>"; };
 		50ED8C95172FD75500F70A80 /* HEggHelperMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HEggHelperMethods.m; path = HappyEggs/Helpers/HEggHelperMethods.m; sourceTree = "<group>"; };
 		50ED8C97172FD94400F70A80 /* LBChildBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LBChildBrowserViewController.h; path = HappyEggs/Controllers/LBChildBrowserViewController.h; sourceTree = "<group>"; };
@@ -389,6 +394,8 @@
 				50ED8C98172FD94500F70A80 /* LBChildBrowserViewController.m */,
 				5090195A1723AFC300902DEB /* HEggHomePageVC.h */,
 				5090195B1723AFC300902DEB /* HEggHomePageVC.m */,
+				50944FAA173094530091E08E /* HEggLoginVC.h */,
+				50944FAB173094530091E08E /* HEggLoginVC.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -452,6 +459,7 @@
 		50944F6C17306AC40091E08E /* splash */ = {
 			isa = PBXGroup;
 			children = (
+				50944FAD1730A0DE0091E08E /* splash_background_5@2x.png */,
 				50944F6D17306AC40091E08E /* Default.png */,
 				50944F6E17306AC40091E08E /* Default@2x.png */,
 				50944F6F17306AC40091E08E /* Easter-Eggs1136x640.jpg */,
@@ -462,9 +470,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		501B044E1723A70D00F9A5AD /* HappyEggs */ = {
+		501B044E1723A70D00F9A5AD /* Happy Eggs */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 501B04721723A70D00F9A5AD /* Build configuration list for PBXNativeTarget "HappyEggs" */;
+			buildConfigurationList = 501B04721723A70D00F9A5AD /* Build configuration list for PBXNativeTarget "Happy Eggs" */;
 			buildPhases = (
 				501B044B1723A70D00F9A5AD /* Sources */,
 				501B044C1723A70D00F9A5AD /* Frameworks */,
@@ -475,7 +483,7 @@
 			);
 			dependencies = (
 			);
-			name = HappyEggs;
+			name = "Happy Eggs";
 			productName = HappyEggs;
 			productReference = 501B044F1723A70D00F9A5AD /* HappyEggs.app */;
 			productType = "com.apple.product-type.application";
@@ -502,7 +510,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				501B044E1723A70D00F9A5AD /* HappyEggs */,
+				501B044E1723A70D00F9A5AD /* Happy Eggs */,
 			);
 		};
 /* End PBXProject section */
@@ -544,6 +552,7 @@
 				50944FA6173082200091E08E /* 6.jpg in Resources */,
 				50944FA7173082200091E08E /* 7.jpg in Resources */,
 				50944FA8173082200091E08E /* 8.jpg in Resources */,
+				50944FAE1730A0DE0091E08E /* splash_background_5@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -592,6 +601,7 @@
 				509019971723C62000902DEB /* SBJsonWriter.m in Sources */,
 				50ED8C96172FD75500F70A80 /* HEggHelperMethods.m in Sources */,
 				50ED8C99172FD94500F70A80 /* LBChildBrowserViewController.m in Sources */,
+				50944FAC173094530091E08E /* HEggLoginVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -721,7 +731,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		501B04721723A70D00F9A5AD /* Build configuration list for PBXNativeTarget "HappyEggs" */ = {
+		501B04721723A70D00F9A5AD /* Build configuration list for PBXNativeTarget "Happy Eggs" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				501B04731723A70D00F9A5AD /* Debug */,

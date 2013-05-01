@@ -164,7 +164,7 @@
         <!--Navigation Controller-->
         <scene sceneID="SvP-fm-NGc">
             <objects>
-                <navigationController id="tLu-Mi-hUz" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MyNavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tLu-Mi-hUz" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackOpaque" id="oxt-gj-dQI">
@@ -179,6 +179,48 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JD3-9l-jzJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="126" y="18"/>
+        </scene>
+        <!--Egg LoginVC-->
+        <scene sceneID="ECb-g4-JAh">
+            <objects>
+                <viewController storyboardIdentifier="HEggLoginVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="feY-Bk-bw3" customClass="HEggLoginVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hJx-oT-Hcf">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Upx-BJ-pa5">
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Ваш псевдоним" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YHs-8l-wzx">
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="go"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" type="user" id="BMy-ml-6Ca"/>
+                                    <constraint firstItem="YHs-8l-wzx" firstAttribute="leading" secondItem="Upx-BJ-pa5" secondAttribute="leading" type="default" id="Kkk-l5-s7Q"/>
+                                    <constraint firstItem="YHs-8l-wzx" firstAttribute="bottom" secondItem="Upx-BJ-pa5" secondAttribute="bottom" type="default" id="e1v-F9-Pdb"/>
+                                    <constraint firstItem="YHs-8l-wzx" firstAttribute="trailing" secondItem="Upx-BJ-pa5" secondAttribute="trailing" type="default" id="xZn-AG-BCe"/>
+                                    <constraint firstItem="YHs-8l-wzx" firstAttribute="top" secondItem="Upx-BJ-pa5" secondAttribute="top" type="default" id="y7v-Eb-jKU"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Upx-BJ-pa5" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="DvV-VM-SNW"/>
+                            <constraint firstItem="Upx-BJ-pa5" firstAttribute="leading" secondItem="hJx-oT-Hcf" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="No6-b0-Z1k"/>
+                            <constraint firstItem="Upx-BJ-pa5" firstAttribute="top" secondItem="hJx-oT-Hcf" secondAttribute="top" type="user" id="mPd-17-2nz"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="container" destination="Upx-BJ-pa5" id="Vxi-3v-eeC"/>
+                        <outlet property="textField" destination="YHs-8l-wzx" id="3Gv-Sj-vF0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Me-NU-2BE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="126" y="-560"/>
         </scene>
         <!--Child Browser View Controller-->
         <scene sceneID="nrc-x0-axd">
@@ -248,47 +290,6 @@
     <resources>
         <image name="small_egg.png" width="80" height="100"/>
     </resources>
-    <classes>
-        <class className="GAITrackedViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GAITrackedViewController.h"/>
-        </class>
-        <class className="HEggCell" superclassName="UICollectionViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/HEggCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="eggImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="eggTopBackground" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="imagesContainer" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="HEggHomePageVC" superclassName="GAITrackedViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/HEggHomePageVC.h"/>
-            <relationships>
-                <relationship kind="outlet" name="eggSkinImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="eggsList" candidateClass="UICollectionView"/>
-                <relationship kind="outlet" name="tableContainer" candidateClass="UIView"/>
-                <relationship kind="outlet" name="topSkinn" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="LBChildBrowserViewController" superclassName="GAITrackedViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LBChildBrowserViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="currentWebPage" candidateClass="UIWebView"/>
-                <relationship kind="outlet" name="spinner" candidateClass="UIActivityIndicatorView"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="UICollectionReusableView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
-        </class>
-        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
-        </class>
-        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -13,10 +13,8 @@
 + (NSString *)userNickName
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSString *nick = [prefs objectForKey:USERNAME_KEY];
-    
-   // return nick;
-    return @"Sebek";
+    NSString *nick = [prefs objectForKey:USERNAME_KEY];    
+    return nick;
 }
 
 
