@@ -915,19 +915,34 @@ containing a value of this type.
         public static final int abs__toast_frame=0x7f02006f;
         public static final int bottom_background=0x7f020070;
         public static final int bottom_background_line=0x7f020071;
-        public static final int easter=0x7f020072;
-        public static final int egg1=0x7f020073;
-        public static final int egg2=0x7f020074;
-        public static final int egg3=0x7f020075;
-        public static final int egg4=0x7f020076;
-        public static final int egg5=0x7f020077;
-        public static final int egg6=0x7f020078;
-        public static final int egg7=0x7f020079;
-        public static final int egg_iphone=0x7f02007a;
-        public static final int ic_action_fail=0x7f02007b;
-        public static final int ic_action_ok=0x7f02007c;
-        public static final int ic_launcher=0x7f02007d;
-        public static final int icon=0x7f02007e;
+        public static final int e0=0x7f020072;
+        public static final int e1=0x7f020073;
+        public static final int e10=0x7f020074;
+        public static final int e2=0x7f020075;
+        public static final int e3=0x7f020076;
+        public static final int e4=0x7f020077;
+        public static final int e5=0x7f020078;
+        public static final int e6=0x7f020079;
+        public static final int e7=0x7f02007a;
+        public static final int e8=0x7f02007b;
+        public static final int e9=0x7f02007c;
+        public static final int easter=0x7f02007d;
+        public static final int egg1=0x7f02007e;
+        public static final int egg2=0x7f02007f;
+        public static final int egg3=0x7f020080;
+        public static final int egg4=0x7f020081;
+        public static final int egg5=0x7f020082;
+        public static final int egg6=0x7f020083;
+        public static final int egg7=0x7f020084;
+        public static final int egg_iphone=0x7f020085;
+        public static final int first_scratch=0x7f020086;
+        public static final int ic_action_fail=0x7f020087;
+        public static final int ic_action_ok=0x7f020088;
+        public static final int ic_launcher=0x7f020089;
+        public static final int icon=0x7f02008a;
+        public static final int second_scratch=0x7f02008b;
+        public static final int small_egg=0x7f02008c;
+        public static final int third_scratch=0x7f02008d;
     }
     public static final class id {
         public static final int abs__action_bar=0x7f040020;
@@ -1075,6 +1090,7 @@ containing a value of this type.
         public static final int close=0x7f090019;
         public static final int ga_trackingId=0x7f09000d;
         public static final int hello_world=0x7f090011;
+        public static final int lose=0x7f09001b;
         public static final int nick=0x7f090017;
         public static final int nick_hint=0x7f090018;
         public static final int rating=0x7f090015;
@@ -1082,6 +1098,8 @@ containing a value of this type.
         public static final int share=0x7f090012;
         public static final int sharesubject=0x7f090013;
         public static final int sharetext=0x7f090014;
+        public static final int tie=0x7f09001c;
+        public static final int win=0x7f09001a;
     }
     public static final class style {
         /** 

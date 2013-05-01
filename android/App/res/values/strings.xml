@@ -6,13 +6,17 @@
     <string name="action_refresh">"Обновить"</string>
     <string name="hello_world">Hello world!</string>
 	<string name="share">Share</string>
-    <string name="sharesubject">Eggs Fight</string>
-    <string name="sharetext">"Check out share text"</string>
+    <string name="sharesubject">Зацените Happy Eggs!</string>
+    <string name="sharetext">"http://play.google.com/store/apps/details?id=ua.ck.android.happyeggs"</string>
     <string name="rating">"Рейтинг"</string>
     <string name="settings">"Настройки"</string>
     <string name="nick">"Ваш псевдоним :"</string>
     <string name="nick_hint">"псевдоним"</string>
     <string name="close">"Готово"</string>
-    
+     
+    <string name="win">"Ура, вы победили!"</string>
+    <string name="lose">"Жаль, вы проиграли, возможно, выберите другое яйцо и попробуйте еще?"</string>
+    <string name="tie">"Вот это да! Оба яйца сварили так круто, что ни одно не разбилось!    "</string>
+   
     
 </resources>

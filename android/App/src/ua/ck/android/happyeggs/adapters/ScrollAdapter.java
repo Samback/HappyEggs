@@ -46,7 +46,7 @@ public class ScrollAdapter extends BaseAdapter {
 		View v = mInflator.inflate(R.layout.item_scroll, null);
 		ImageView imgChooseEgg = (ImageView)v.findViewById(R.id.imgChooseEgg);
 	    BitmapFactory.Options o2 = new BitmapFactory.Options();
-	    o2.inSampleSize=10;
+	    o2.inSampleSize=5;
 	    Bitmap bm = BitmapFactory.decodeResource(mContext.getResources(), images[position], o2);
 	    imgChooseEgg.setImageBitmap(bm);
 		return v;
