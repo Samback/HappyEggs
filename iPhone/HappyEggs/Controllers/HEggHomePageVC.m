@@ -34,13 +34,12 @@
 @property (nonatomic, strong) Egg *eggOnScreen;
 @property (nonatomic) int userAttack;
 @property (nonatomic) int enemyAttack;
-@property (nonatomic, getter = isActiveToFight) BOOL activeToFight;
+@property (atomic) __block BOOL activeToFight;
 
 @property (weak, nonatomic) IBOutlet UIView *tableContainer;
 @property (weak, nonatomic) IBOutlet UIImageView *topSkinn;
 
 @property (nonatomic, strong) NSArray *scratchArray;
-
 @end
 
 @implementation HEggHomePageVC
@@ -69,7 +68,7 @@
 
 
 - (REActivityViewController *)activityViewController{
-    if (!_activityViewController) {
+//    if (!_activityViewController) {
         REFacebookActivity *facebookActivity = [[REFacebookActivity alloc] init];
         RETwitterActivity *twitterActivity = [[RETwitterActivity alloc] init];
         REVKActivity *vkActivity = [[REVKActivity alloc] initWithClientId:VK_APP_ID];
@@ -81,15 +80,18 @@
         // Create REActivityViewController controller and assign data source
         //
         REActivityViewController *activityViewController = [[REActivityViewController alloc] initWithViewController:self activities:activities];
-        
+        UIGraphicsBeginImageContext(self.view.bounds.size);
+        [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+        UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();             UIGraphicsEndImageContext();
+        UIGraphicsEndImageContext();
         activityViewController.userInfo = @{
-                                          //  @"image": [UIImage imageNamed:SHARING_IMAGE],
+                                            @"image": viewImage,
                                             @"text": SHARING_TEXT,
                                             @"url": [NSURL URLWithString:SHARING_URL_FOR_APP],
                                             };
 
         _activityViewController = activityViewController;
-    }
+//    }
     return _activityViewController;
 }
 
@@ -97,10 +99,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.activeToFight = YES;
     self.tableContainer.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:BOTTOM_BACKGROUND_IMAGE_NAME]];
     self.topSkinn.image = [UIImage imageNamed:TOP_GROUND_IMAGE_NAME];
     [self configureBump];
-    self.activeToFight = YES;
     self.trackedViewName = @"Home page";
     
     self.takeController = [[FDTakeController alloc] init];
@@ -339,7 +341,7 @@
 
 - (void)getBumpInfo{
     [[BumpClient sharedClient] setDataReceivedBlock:^(BumpChannelID channel, NSData *data) {
-        if (self.isActiveToFight) {
+        if (self.activeToFight) {
             NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSDictionary *response = [jsonString JSONValue];
             NSLog(@"Parsewd answer %@  %@", response, jsonString);
@@ -352,6 +354,11 @@
                   [[BumpClient sharedClient] userIDForChannel:channel], response
                   );
         }
+        else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:APP_NAME message:UPDATE_YOUR_EGG delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+            NSLog(@"Cant to bump");
+        }
     }];
 }
 
@@ -360,24 +367,25 @@
 {  
     
     [[BumpClient sharedClient] setChannelConfirmedBlock:^(BumpChannelID channel) {
-        if (self.isActiveToFight) {
-            NSLog(@"Channel with %@ confirmed.", [[BumpClient sharedClient] userIDForChannel:channel]);
-            self.userAttack = arc4random() % 100;
-            NSDictionary *dictionary = @{
-                                         @"attack":[NSString stringWithFormat:@"%d", self.userAttack],
-                                         };
-
-            NSError *error ;
-            
-            
-            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary options:NSJSONWritingPrettyPrinted error:&error];
-            if (!error) {
-                [[BumpClient sharedClient] sendData:jsonData
-                                          toChannel:channel];
+            NSLog(@"active to fight %d", self.activeToFight);
+            if (self.activeToFight) {
+                NSLog(@"Channel with %@ confirmed.", [[BumpClient sharedClient] userIDForChannel:channel]);
+                self.userAttack = arc4random() % 100;
+                NSDictionary *dictionary = @{
+                                             @"attack":[NSString stringWithFormat:@"%d", self.userAttack],
+                                             };
+                
+                NSError *error ;
+                
+                
+                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary options:NSJSONWritingPrettyPrinted error:&error];
+                if (!error) {
+                    [[BumpClient sharedClient] sendData:jsonData
+                                              toChannel:channel];
+                    
+                }
                 
             }
-            
-        }
     }];
     
 }
@@ -398,7 +406,6 @@
 #pragma mark - Game Play
 - (void)showResults
 {
-    self.activeToFight = NO;
     NSString *result = @"win";
     if (self.userAttack > self.enemyAttack) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:APP_NAME message:WIN_MESSAGE delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
@@ -415,6 +422,11 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:APP_NAME message:LOSE_MESSAGE delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
         result = @"lose";
         [alert show];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.activeToFight = NO;
+        });
+
+        
         int numberOfElements = self.scratchArray.count;
         int position = arc4random() % numberOfElements;
         UIImage *scratchImage = [UIImage imageNamed:self.scratchArray[position%numberOfElements]];
@@ -443,15 +455,6 @@
             [self stopJigglingOnCollection];
             [self deleteEgg];
         }
-    }
-    else if (alertView.tag == TAG_WIN) {
-        self.activeToFight = YES;
-    }
-    else if (alertView.tag == TAG_TIE) {
-        self.activeToFight = YES;
-    }
-    else if (alertView.tag == TAG_LOSE) {
-        self.activeToFight = NO;
     }
 }
 
