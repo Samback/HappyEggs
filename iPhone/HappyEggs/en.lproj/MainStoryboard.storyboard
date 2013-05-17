@@ -119,11 +119,26 @@
                                     <constraint firstItem="Qmc-ll-lp6" firstAttribute="top" secondItem="N90-gj-NqQ" secondAttribute="bottom" type="user" id="f7d-FD-r1V"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wzy-eW-PIT">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="getPhoto:" destination="ejY-Dg-1GZ" eventType="touchUpInside" id="Jlv-eM-cqc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="TsF-5e-Gbw" firstAttribute="bottom" secondItem="dFw-b2-Vwb" secondAttribute="bottom" type="user" id="AM2-le-gwm"/>
                             <constraint firstItem="TsF-5e-Gbw" firstAttribute="top" secondItem="dFw-b2-Vwb" secondAttribute="top" type="user" id="RJF-D8-es3"/>
+                            <constraint firstItem="Wzy-eW-PIT" firstAttribute="top" secondItem="dFw-b2-Vwb" secondAttribute="top" type="default" id="UC9-tF-214"/>
+                            <constraint firstItem="Wzy-eW-PIT" firstAttribute="leading" secondItem="dFw-b2-Vwb" secondAttribute="leading" type="default" id="hSe-or-tpH"/>
                             <constraint firstItem="TsF-5e-Gbw" firstAttribute="leading" secondItem="dFw-b2-Vwb" secondAttribute="leading" type="default" id="o78-9M-1Kf"/>
                             <constraint firstItem="TsF-5e-Gbw" firstAttribute="trailing" secondItem="dFw-b2-Vwb" secondAttribute="trailing" type="default" id="vTh-8M-X3k"/>
                         </constraints>
@@ -290,6 +305,57 @@
     <resources>
         <image name="small_egg.png" width="80" height="100"/>
     </resources>
+    <classes>
+        <class className="GAITrackedViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GAITrackedViewController.h"/>
+        </class>
+        <class className="HEggCell" superclassName="UICollectionViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HEggCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="eggImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="eggTopBackground" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="imagesContainer" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="HEggHomePageVC" superclassName="GAITrackedViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HEggHomePageVC.h"/>
+            <relationships>
+                <relationship kind="action" name="longPressForDelete:" candidateClass="UILongPressGestureRecognizer"/>
+                <relationship kind="action" name="openStatistic:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="shareWithFriends:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="eggSkinImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="eggsList" candidateClass="UICollectionView"/>
+                <relationship kind="outlet" name="tableContainer" candidateClass="UIView"/>
+                <relationship kind="outlet" name="topSkinn" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="HEggLoginVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HEggLoginVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="container" candidateClass="UIView"/>
+                <relationship kind="outlet" name="textField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="LBChildBrowserViewController" superclassName="GAITrackedViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LBChildBrowserViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="currentWebPage" candidateClass="UIWebView"/>
+                <relationship kind="outlet" name="spinner" candidateClass="UIActivityIndicatorView"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="UICollectionReusableView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
+        </class>
+        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
+        </class>
+        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

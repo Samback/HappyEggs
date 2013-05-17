@@ -20,7 +20,6 @@
     #import "GAITrackedViewController.h"
     #import <FDTake/FDTakeController.h>
     #import <AssetsLibrary/AssetsLibrary.h>
-    #import <ALAssetsLibrary-CustomPhotoAlbum/ALAssetsLibrary+CustomPhotoAlbum.h>
     #import <NYXImagesKit/NYXImagesKit.h>
     #import "HEggHelperMethods.h"
     #import <AFNetworking/AFHTTPClient.h>

@@ -13,8 +13,10 @@
 
 @implementation AppDelegate
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    self.userPhotos = [NSMutableDictionary dictionary];
     [self initRestKitWithCoreDataIntegration];
     [self initSourceInCoreData];
     [self initBump];

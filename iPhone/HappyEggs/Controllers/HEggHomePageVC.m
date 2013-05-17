@@ -124,7 +124,7 @@
 {
     [super viewWillAppear:animated];
       
-    UIImage *beforeScale = [UIImage imageNamed:self.eggOnScreen.background];
+    UIImage *beforeScale = [HEggHelperMethods imageForEgg:self.eggOnScreen];
     UIImage *scaled = [UIImage imageWithCGImage:beforeScale.CGImage scale:SCALED_TIMES orientation:UIImageOrientationUp];
     UIImage* cropped = [scaled cropToSize:CGSizeMake(200, 262) usingMode:NYXCropModeCenter];
     self.eggSkinImage.image = cropped;
@@ -178,9 +178,9 @@
     cell.layer.cornerRadius = RADIUS;
     cell.layer.masksToBounds = YES;
     NSLog(@"Egg background %@", egg.background);
-    UIImage *reScaled = [UIImage imageWithCGImage:[UIImage imageNamed:egg.background].CGImage scale:SCALED_TIMES orientation:UIImageOrientationUp];
-    UIImage* cropped = [ reScaled cropToSize:CGSizeMake(80, 120) usingMode:NYXCropModeCenter];
-    cell.eggImage.image = cropped;
+    UIImage *reScaled = [UIImage imageWithCGImage:[HEggHelperMethods imageForEgg:egg].CGImage scale:SCALED_TIMES orientation:UIImageOrientationUp];
+   // UIImage* cropped = [ reScaled cropToSize:CGSizeMake(80, 120) usingMode:NYXCropModeCenter];
+    cell.eggImage.image = reScaled;
     return cell;
 }
 
@@ -197,6 +197,9 @@
     }
 }
 
+- (IBAction)getPhoto:(UIButton *)sender {
+     [self.takeController takePhotoOrChooseFromLibrary];
+}
 
 - (void)addNewEggBranch
 {
@@ -219,11 +222,49 @@
 
 - (void)takeController:(FDTakeController *)controller gotPhoto:(UIImage *)photo withInfo:(NSDictionary *)info
 {
-    NSManagedObjectContext *context = [RKManagedObjectStore defaultStore].mainQueueManagedObjectContext;
-    NSLog(@"geted image %@", photo);
-    NSInteger eggId = self.numberOfUniqeEggs;
-    [Egg addEggWithName:[NSString stringWithFormat:@"Image name %d", eggId] background:@"1.jpg" couldDelete:YES eggId:eggId type:USER_EGG_TYPE andContext:context];
+//    NSLog(@"Photo ")
+    NSString *path = [self saveImage:photo withName:[[NSDate date] description]];
+    if (path) {
+        NSManagedObjectContext *context = [RKManagedObjectStore defaultStore].mainQueueManagedObjectContext;
+        NSInteger eggId = self.numberOfUniqeEggs;
+        [Egg addEggWithName:[NSString stringWithFormat:@"Image name %d", eggId] background:path couldDelete:YES eggId:eggId type:USER_EGG_TYPE andContext:context];
+    }
+//    [[[ALAssetsLibrary alloc] init] saveImage:photo toAlbum:@"Eggs Images" completionBlock:^(NSURL *assetURL, NSError *error){
+       
+//    }failureBlock:^(NSError *error){
+//        
+//    }];
+   
 }
+
+- (NSString *)saveImage:(UIImage*)image withName:(NSString *)name
+{
+    if (image != nil)
+    {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory,
+                                                             NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString* path = [documentsDirectory stringByAppendingPathComponent:
+                          [NSString stringWithFormat:@"%@.png", name]];
+        NSLog(@"Path to file %@", path);
+        NSData* data = UIImagePNGRepresentation(image);
+        [data writeToFile:path atomically:YES];
+        return path;
+    }
+    return nil;
+}
+
+- (UIImage*)loadImageWithName
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory,
+                                                         NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString* path = [documentsDirectory stringByAppendingPathComponent:
+                      [NSString stringWithString: @"test.png"] ];
+    UIImage* image = [UIImage imageWithContentsOfFile:path];
+    return image;
+}
+
 
 
 - (void)chooseNewSkinForEgg:(Egg *)newEgg
@@ -232,10 +273,11 @@
     self.activeToFight = YES;
     self.eggOnScreen = newEgg;
     self.topSkinn.image = [UIImage imageNamed:TOP_GROUND_IMAGE_NAME];
-    UIImage *beforeScale = [UIImage imageNamed:self.eggOnScreen.background];
-    UIImage *scaled = [UIImage imageWithCGImage:beforeScale.CGImage scale:SCALED_TIMES orientation:UIImageOrientationUp];
-    UIImage* cropped = [scaled cropToSize:CGSizeMake(200, 262) usingMode:NYXCropModeCenter];
-    self.eggSkinImage.image = cropped;
+    UIImage *beforeScale = [HEggHelperMethods imageForEgg:self.eggOnScreen];
+    UIImageOrientation orientation = beforeScale.imageOrientation;
+    UIImage *scaled = [UIImage imageWithCGImage:beforeScale.CGImage scale:SCALED_TIMES orientation:orientation];
+    //UIImage* cropped = [scaled cropToSize:CGSizeMake(200, 262) usingMode:NYXCropModeCenter];
+    self.eggSkinImage.image = scaled;
 }
 
 - (void)deleteEggAtIndex:(NSIndexPath *)indexPath

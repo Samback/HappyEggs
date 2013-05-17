@@ -13,7 +13,7 @@
 + (NSString *)userNickName
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSString *nick = [prefs objectForKey:USERNAME_KEY];    
+    NSString *nick = [prefs objectForKey:USERNAME_KEY];
     return nick;
 }
 
@@ -40,5 +40,21 @@
     return uuid;
 }
 
+
++ (UIImage *)imageForEgg:(Egg *)egg
+{
+    if ([egg.type isEqualToString:USER_EGG_TYPE]) {
+        NSString *imageName = egg.background;
+        UIImage *eggImage = [DELEGATE.userPhotos objectForKey:imageName];
+        if (eggImage) {
+            return eggImage;
+        }
+        eggImage = [UIImage imageWithContentsOfFile:imageName];
+        [DELEGATE.userPhotos setObject: eggImage forKey:imageName];
+        return eggImage;
+    }
+    
+    return [UIImage imageNamed:egg.background];
+}
 
 @end

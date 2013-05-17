@@ -7,10 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Egg.h"
 
 @interface HEggHelperMethods : NSObject
 + (NSString *)getUUID;
 + (NSString *)userNickName;
 + (void)saveUserNickName:(NSString *)nick;
+
++ (UIImage *)imageForEgg:(Egg *)egg;
 
 @end
