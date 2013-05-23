@@ -18,7 +18,7 @@
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RJw-E8-jN9">
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="200" id="nyv-jK-1tY"/>
+                                                    <constraint firstAttribute="width" constant="200" id="duw-FO-ad9"/>
                                                 </constraints>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Mz-Uf-SFf" userLabel="Egg_Top"/>
@@ -26,12 +26,12 @@
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="RJw-E8-jN9" firstAttribute="bottom" secondItem="N90-gj-NqQ" secondAttribute="bottom" type="default" id="Ojr-oP-5c2"/>
-                                            <constraint firstAttribute="centerX" secondItem="RJw-E8-jN9" secondAttribute="centerX" type="user" id="Syj-6a-ckr"/>
                                             <constraint firstItem="3Mz-Uf-SFf" firstAttribute="top" secondItem="N90-gj-NqQ" secondAttribute="top" type="default" id="Vj5-IW-mfl"/>
                                             <constraint firstItem="3Mz-Uf-SFf" firstAttribute="bottom" secondItem="N90-gj-NqQ" secondAttribute="bottom" type="default" id="Y1J-If-MGV"/>
                                             <constraint firstItem="RJw-E8-jN9" firstAttribute="top" secondItem="N90-gj-NqQ" secondAttribute="top" type="default" id="Zgb-R7-Moq"/>
-                                            <constraint firstItem="RJw-E8-jN9" firstAttribute="centerX" secondItem="3Mz-Uf-SFf" secondAttribute="centerX" type="default" id="eap-ix-uF9"/>
                                             <constraint firstItem="3Mz-Uf-SFf" firstAttribute="leading" secondItem="N90-gj-NqQ" secondAttribute="leading" type="default" id="i8N-fw-npz"/>
+                                            <constraint firstItem="RJw-E8-jN9" firstAttribute="centerX" secondItem="3Mz-Uf-SFf" secondAttribute="centerX" type="default" id="pH2-8u-glf"/>
+                                            <constraint firstItem="RJw-E8-jN9" firstAttribute="centerX" secondItem="N90-gj-NqQ" secondAttribute="centerX" type="default" id="xzN-Fs-Z2z"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qmc-ll-lp6" userLabel="TableContainer">
@@ -136,11 +136,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="TsF-5e-Gbw" firstAttribute="bottom" secondItem="dFw-b2-Vwb" secondAttribute="bottom" type="user" id="AM2-le-gwm"/>
+                            <constraint firstItem="TsF-5e-Gbw" firstAttribute="trailing" secondItem="dFw-b2-Vwb" secondAttribute="trailing" type="default" id="Kzg-Jx-ewR"/>
                             <constraint firstItem="TsF-5e-Gbw" firstAttribute="top" secondItem="dFw-b2-Vwb" secondAttribute="top" type="user" id="RJF-D8-es3"/>
                             <constraint firstItem="Wzy-eW-PIT" firstAttribute="top" secondItem="dFw-b2-Vwb" secondAttribute="top" type="default" id="UC9-tF-214"/>
                             <constraint firstItem="Wzy-eW-PIT" firstAttribute="leading" secondItem="dFw-b2-Vwb" secondAttribute="leading" type="default" id="hSe-or-tpH"/>
                             <constraint firstItem="TsF-5e-Gbw" firstAttribute="leading" secondItem="dFw-b2-Vwb" secondAttribute="leading" type="default" id="o78-9M-1Kf"/>
-                            <constraint firstItem="TsF-5e-Gbw" firstAttribute="trailing" secondItem="dFw-b2-Vwb" secondAttribute="trailing" type="default" id="vTh-8M-X3k"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="7Ds-a8-QYY">
@@ -320,9 +320,6 @@
         <class className="HEggHomePageVC" superclassName="GAITrackedViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/HEggHomePageVC.h"/>
             <relationships>
-                <relationship kind="action" name="longPressForDelete:" candidateClass="UILongPressGestureRecognizer"/>
-                <relationship kind="action" name="openStatistic:" candidateClass="UIBarButtonItem"/>
-                <relationship kind="action" name="shareWithFriends:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="eggSkinImage" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="eggsList" candidateClass="UICollectionView"/>
                 <relationship kind="outlet" name="tableContainer" candidateClass="UIView"/>

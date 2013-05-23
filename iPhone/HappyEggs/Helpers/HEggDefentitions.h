@@ -1,7 +1,7 @@
-#import "AppDelegate.h"
+#import "HEAppDelegate.h"
 
 //#define NSLog(...)
-#define DELEGATE ((AppDelegate *)([[UIApplication sharedApplication] delegate]))
+#define DELEGATE ((HEAppDelegate *)([[UIApplication sharedApplication] delegate]))
 
 #define HEIGHT_IPHONE_5 568
 #define IS_IPHONE_5 ([[UIScreen mainScreen] bounds ].size.height == HEIGHT_IPHONE_5 )
@@ -40,6 +40,7 @@
 
 
 #define GA_API_KEY @"UA-38756409-2"
+#define MY_BANNER_UNIT_ID @""
 #define TIME_OF_GA_UPDATE 10
 #define CHILD_BROWSER @"Open statistic"
 
