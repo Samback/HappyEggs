@@ -12,6 +12,7 @@
 #import "HEggCell.h"
 #import "SBJson.h"
 #import "LBChildBrowserViewController.h"
+#import "GADBannerView.h"
 
 #define BOTTOM_BACKGROUND_IMAGE_NAME @"bottom_background"
 #define  RADIUS 15
@@ -40,6 +41,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *topSkinn;
 
 @property (nonatomic, strong) NSArray *scratchArray;
+@property (nonatomic, strong) GADBannerView *mobileBanner;
 @end
 
 @implementation HEggHomePageVC
@@ -178,7 +180,7 @@
     cell.layer.cornerRadius = RADIUS;
     cell.layer.masksToBounds = YES;
     NSLog(@"Egg background %@", egg.background);
-    UIImage *reScaled = [UIImage imageWithCGImage:[HEggHelperMethods imageForEgg:egg].CGImage scale:SCALED_TIMES orientation:UIImageOrientationUp];
+    UIImage *reScaled = [UIImage imageWithCGImage:[HEggHelperMethods imageForEgg:egg].CGImage scale:SCALED_TIMES orientation:egg.orientationValue];
    // UIImage* cropped = [ reScaled cropToSize:CGSizeMake(80, 120) usingMode:NYXCropModeCenter];
     cell.eggImage.image = reScaled;
     return cell;
@@ -222,19 +224,13 @@
 
 - (void)takeController:(FDTakeController *)controller gotPhoto:(UIImage *)photo withInfo:(NSDictionary *)info
 {
-//    NSLog(@"Photo ")
+    NSLog(@"Photo %@", photo);
     NSString *path = [self saveImage:photo withName:[[NSDate date] description]];
     if (path) {
         NSManagedObjectContext *context = [RKManagedObjectStore defaultStore].mainQueueManagedObjectContext;
         NSInteger eggId = self.numberOfUniqeEggs;
-        [Egg addEggWithName:[NSString stringWithFormat:@"Image name %d", eggId] background:path couldDelete:YES eggId:eggId type:USER_EGG_TYPE andContext:context];
-    }
-//    [[[ALAssetsLibrary alloc] init] saveImage:photo toAlbum:@"Eggs Images" completionBlock:^(NSURL *assetURL, NSError *error){
-       
-//    }failureBlock:^(NSError *error){
-//        
-//    }];
-   
+        [Egg addEggWithName:[NSString stringWithFormat:@"Image name %d", eggId] background:path couldDelete:YES eggId:eggId type:USER_EGG_TYPE orientation:photo.imageOrientation andContext:context];
+    }   
 }
 
 - (NSString *)saveImage:(UIImage*)image withName:(NSString *)name
@@ -254,19 +250,6 @@
     return nil;
 }
 
-- (UIImage*)loadImageWithName
-{
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory,
-                                                         NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString* path = [documentsDirectory stringByAppendingPathComponent:
-                      [NSString stringWithString: @"test.png"] ];
-    UIImage* image = [UIImage imageWithContentsOfFile:path];
-    return image;
-}
-
-
-
 - (void)chooseNewSkinForEgg:(Egg *)newEgg
 {
     NSLog(@"reskin");
@@ -274,9 +257,9 @@
     self.eggOnScreen = newEgg;
     self.topSkinn.image = [UIImage imageNamed:TOP_GROUND_IMAGE_NAME];
     UIImage *beforeScale = [HEggHelperMethods imageForEgg:self.eggOnScreen];
-    UIImageOrientation orientation = beforeScale.imageOrientation;
-    UIImage *scaled = [UIImage imageWithCGImage:beforeScale.CGImage scale:SCALED_TIMES orientation:orientation];
-    //UIImage* cropped = [scaled cropToSize:CGSizeMake(200, 262) usingMode:NYXCropModeCenter];
+    UIImage *scaled = [UIImage imageWithCGImage:beforeScale.CGImage scale:SCALED_TIMES orientation:self.eggOnScreen.orientationValue];
+    //UIImage* cropped = [scaled cropToSize:CGSizeMake(480, 480) usingMode:NYXCropModeCenter];
+    self.eggSkinImage.contentMode = UIViewContentModeScaleAspectFit;
     self.eggSkinImage.image = scaled;
 }
 
@@ -536,6 +519,27 @@
                                                         NSLog(@"Request Error [%@] JSon =   %@", [error localizedDescription],(NSDictionary *)JSON);
                                                     }];
         [operation start];
+}
+
+
+
+#pragma mark - Google Ad 
+- (void)addBannerScreen
+{
+    // Create a view of the standard size at the top of the screen.
+    // Available AdSize constants are explained in GADAdSize.h.
+    self.mobileBanner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+    
+    // Specify the ad's "unit identifier". This is your AdMob Publisher ID.
+    self.mobileBanner.adUnitID = MY_BANNER_UNIT_ID;
+    
+    // Let the runtime know which UIViewController to restore after taking
+    // the user wherever the ad goes and add it to the view hierarchy.
+    self.mobileBanner.rootViewController = self;
+    [self.view addSubview: self.mobileBanner];
+    
+    // Initiate a generic request to load it with an ad.
+    [self.mobileBanner loadRequest:[GADRequest request]];
 }
 
 
