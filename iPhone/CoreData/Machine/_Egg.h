@@ -9,6 +9,7 @@ extern const struct EggAttributes {
 	__unsafe_unretained NSString *couldDelete;
 	__unsafe_unretained NSString *eggId;
 	__unsafe_unretained NSString *name;
+	__unsafe_unretained NSString *orientation;
 	__unsafe_unretained NSString *type;
 } EggAttributes;
 
@@ -17,6 +18,7 @@ extern const struct EggRelationships {
 
 extern const struct EggFetchedProperties {
 } EggFetchedProperties;
+
 
 
 
@@ -77,6 +79,18 @@ extern const struct EggFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSNumber* orientation;
+
+
+@property int16_t orientationValue;
+- (int16_t)orientationValue;
+- (void)setOrientationValue:(int16_t)value_;
+
+//- (BOOL)validateOrientation:(id*)value_ error:(NSError**)error_;
+
+
+
+
 @property (nonatomic, strong) NSString* type;
 
 
@@ -122,6 +136,15 @@ extern const struct EggFetchedProperties {
 
 - (NSString*)primitiveName;
 - (void)setPrimitiveName:(NSString*)value;
+
+
+
+
+- (NSNumber*)primitiveOrientation;
+- (void)setPrimitiveOrientation:(NSNumber*)value;
+
+- (int16_t)primitiveOrientationValue;
+- (void)setPrimitiveOrientationValue:(int16_t)value_;
 
 
 

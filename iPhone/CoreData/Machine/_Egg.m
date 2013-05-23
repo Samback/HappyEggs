@@ -8,6 +8,7 @@ const struct EggAttributes EggAttributes = {
 	.couldDelete = @"couldDelete",
 	.eggId = @"eggId",
 	.name = @"name",
+	.orientation = @"orientation",
 	.type = @"type",
 };
 
@@ -49,6 +50,10 @@ const struct EggFetchedProperties EggFetchedProperties = {
 	}
 	if ([key isEqualToString:@"eggIdValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"eggId"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+	}
+	if ([key isEqualToString:@"orientationValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"orientation"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 	}
 
@@ -119,6 +124,32 @@ const struct EggFetchedProperties EggFetchedProperties = {
 
 @dynamic name;
 
+
+
+
+
+
+@dynamic orientation;
+
+
+
+- (int16_t)orientationValue {
+	NSNumber *result = [self orientation];
+	return [result shortValue];
+}
+
+- (void)setOrientationValue:(int16_t)value_ {
+	[self setOrientation:[NSNumber numberWithShort:value_]];
+}
+
+- (int16_t)primitiveOrientationValue {
+	NSNumber *result = [self primitiveOrientation];
+	return [result shortValue];
+}
+
+- (void)setPrimitiveOrientationValue:(int16_t)value_ {
+	[self setPrimitiveOrientation:[NSNumber numberWithShort:value_]];
+}
 
 
 
