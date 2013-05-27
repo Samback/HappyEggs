@@ -101,6 +101,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.title = APP_NAME;
     self.activeToFight = YES;
     self.tableContainer.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:BOTTOM_BACKGROUND_IMAGE_NAME]];
     self.topSkinn.image = [UIImage imageNamed:TOP_GROUND_IMAGE_NAME];
@@ -118,19 +119,14 @@
                                                        [NSBundle bundleWithIdentifier:@"FDTakeTranslations"],
                                                        @"There are no sources available to select a photo");
     NSLog(@"%@", str);
-    self.eggOnScreen = [self.fetchedResultsController fetchedObjects][0];
+    self.eggOnScreen = [self.fetchedResultsController fetchedObjects][1];
 
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-      
-    UIImage *beforeScale = [HEggHelperMethods imageForEgg:self.eggOnScreen];
-    UIImage *scaled = [UIImage imageWithCGImage:beforeScale.CGImage scale:SCALED_TIMES orientation:UIImageOrientationUp];
-    UIImage* cropped = [scaled cropToSize:CGSizeMake(200, 262) usingMode:NYXCropModeCenter];
-    self.eggSkinImage.image = cropped;
-
+    [self chooseNewSkinForEgg:self.eggOnScreen];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -199,16 +195,11 @@
     }
 }
 
-- (IBAction)getPhoto:(UIButton *)sender {
-     [self.takeController takePhotoOrChooseFromLibrary];
-}
-
 - (void)addNewEggBranch
 {
     NSLog(@"Add new Egg");
     [self.takeController takePhotoOrChooseFromLibrary];
 }
-
 
 #pragma mark - FDTakeDelegate
 

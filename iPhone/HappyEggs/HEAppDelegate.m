@@ -127,7 +127,14 @@
 {
     NSManagedObjectContext *context = [RKManagedObjectStore defaultStore].mainQueueManagedObjectContext;
     
-    //[Egg addEggWithName:@"Add egg" background:@"addImage.jpg" couldDelete:NO eggId:0 type:ADD_NEW_EGG_TYPE andContext:context];
+   [Egg addEggWithName:@"Add egg"
+            background:@"addImage.jpg"
+           couldDelete:NO
+                 eggId:0
+                  type:ADD_NEW_EGG_TYPE
+           orientation:UIImageOrientationUp
+            andContext:context];
+    
     NSString *eggName = nil;
     NSString *backgroundImageName = nil;
     for (int i = 1; i <= 8; i++) {

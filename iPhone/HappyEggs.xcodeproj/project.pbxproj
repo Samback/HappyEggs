@@ -73,6 +73,7 @@
 		50944FA8173082200091E08E /* 8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 50944FA0173082200091E08E /* 8.jpg */; };
 		50944FAC173094530091E08E /* HEggLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 50944FAB173094530091E08E /* HEggLoginVC.m */; };
 		50944FAE1730A0DE0091E08E /* splash_background_5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50944FAD1730A0DE0091E08E /* splash_background_5@2x.png */; };
+		50C2CDDD1753FD1C0073698B /* addImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 50C2CDDC1753FD1C0073698B /* addImage.jpg */; };
 		50E946ED1745E1AB00E0E519 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50E946BC1745E1AB00E0E519 /* libGoogleAdMobAds.a */; };
 		50E946EE1745E1AB00E0E519 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 50E946BD1745E1AB00E0E519 /* README.txt */; };
 		50E946F31745E4C200E0E519 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50E946F21745E4C200E0E519 /* StoreKit.framework */; };
@@ -184,6 +185,7 @@
 		50944FAA173094530091E08E /* HEggLoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HEggLoginVC.h; path = HappyEggs/Controllers/HEggLoginVC.h; sourceTree = "<group>"; };
 		50944FAB173094530091E08E /* HEggLoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HEggLoginVC.m; path = HappyEggs/Controllers/HEggLoginVC.m; sourceTree = "<group>"; };
 		50944FAD1730A0DE0091E08E /* splash_background_5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splash_background_5@2x.png"; sourceTree = "<group>"; };
+		50C2CDDC1753FD1C0073698B /* addImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = addImage.jpg; sourceTree = "<group>"; };
 		50E9465A1745E1AA00E0E519 /* DFPBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPBannerView.h; sourceTree = "<group>"; };
 		50E9465B1745E1AA00E0E519 /* DFPExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPExtras.h; sourceTree = "<group>"; };
 		50E9465C1745E1AA00E0E519 /* DFPInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPInterstitial.h; sourceTree = "<group>"; };
@@ -213,7 +215,7 @@
 		50E946F21745E4C200E0E519 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		50E946F41745E4D100E0E519 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		50E946F61745E4E800E0E519 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
-		50E946F81745EEBC00E0E519 /* DataBase_v.1.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = DataBase_v.1.1.xcdatamodel; sourceTree = "<group>"; };
+		50E946F81745EEBC00E0E519 /* DataBase_v.1.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataBase_v.1.1.xcdatamodel; sourceTree = "<group>"; };
 		50ED8C94172FD75500F70A80 /* HEggHelperMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HEggHelperMethods.h; path = HappyEggs/Helpers/HEggHelperMethods.h; sourceTree = "<group>"; };
 		50ED8C95172FD75500F70A80 /* HEggHelperMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HEggHelperMethods.m; path = HappyEggs/Helpers/HEggHelperMethods.m; sourceTree = "<group>"; };
 		50ED8C97172FD94400F70A80 /* LBChildBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LBChildBrowserViewController.h; path = HappyEggs/Controllers/LBChildBrowserViewController.h; sourceTree = "<group>"; };
@@ -471,6 +473,7 @@
 		50944F4F17306AC40091E08E /* eggs */ = {
 			isa = PBXGroup;
 			children = (
+				50C2CDDC1753FD1C0073698B /* addImage.jpg */,
 				50944F99173082200091E08E /* 1.jpg */,
 				50944F9A173082200091E08E /* 2.jpg */,
 				50944F9B173082200091E08E /* 3.jpg */,
@@ -662,6 +665,7 @@
 				50944FA8173082200091E08E /* 8.jpg in Resources */,
 				50944FAE1730A0DE0091E08E /* splash_background_5@2x.png in Resources */,
 				50E946EE1745E1AB00E0E519 /* README.txt in Resources */,
+				50C2CDDD1753FD1C0073698B /* addImage.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
