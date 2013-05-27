@@ -74,6 +74,10 @@
 		50944FAC173094530091E08E /* HEggLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 50944FAB173094530091E08E /* HEggLoginVC.m */; };
 		50944FAE1730A0DE0091E08E /* splash_background_5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50944FAD1730A0DE0091E08E /* splash_background_5@2x.png */; };
 		50C2CDDD1753FD1C0073698B /* addImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 50C2CDDC1753FD1C0073698B /* addImage.jpg */; };
+		50C2CDE21754005B0073698B /* sound_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 50C2CDDF1754005B0073698B /* sound_1.mp3 */; };
+		50C2CDE31754005B0073698B /* sound_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 50C2CDE01754005B0073698B /* sound_2.mp3 */; };
+		50C2CDE41754005B0073698B /* sound_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 50C2CDE11754005B0073698B /* sound_3.mp3 */; };
+		50C2CDE6175400890073698B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50C2CDE5175400890073698B /* AVFoundation.framework */; };
 		50E946ED1745E1AB00E0E519 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50E946BC1745E1AB00E0E519 /* libGoogleAdMobAds.a */; };
 		50E946EE1745E1AB00E0E519 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 50E946BD1745E1AB00E0E519 /* README.txt */; };
 		50E946F31745E4C200E0E519 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50E946F21745E4C200E0E519 /* StoreKit.framework */; };
@@ -186,6 +190,10 @@
 		50944FAB173094530091E08E /* HEggLoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HEggLoginVC.m; path = HappyEggs/Controllers/HEggLoginVC.m; sourceTree = "<group>"; };
 		50944FAD1730A0DE0091E08E /* splash_background_5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splash_background_5@2x.png"; sourceTree = "<group>"; };
 		50C2CDDC1753FD1C0073698B /* addImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = addImage.jpg; sourceTree = "<group>"; };
+		50C2CDDF1754005B0073698B /* sound_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sound_1.mp3; sourceTree = "<group>"; };
+		50C2CDE01754005B0073698B /* sound_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sound_2.mp3; sourceTree = "<group>"; };
+		50C2CDE11754005B0073698B /* sound_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sound_3.mp3; sourceTree = "<group>"; };
+		50C2CDE5175400890073698B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		50E9465A1745E1AA00E0E519 /* DFPBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPBannerView.h; sourceTree = "<group>"; };
 		50E9465B1745E1AA00E0E519 /* DFPExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPExtras.h; sourceTree = "<group>"; };
 		50E9465C1745E1AA00E0E519 /* DFPInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPInterstitial.h; sourceTree = "<group>"; };
@@ -227,6 +235,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50C2CDE6175400890073698B /* AVFoundation.framework in Frameworks */,
 				50E946F71745E4E800E0E519 /* AdSupport.framework in Frameworks */,
 				501B04571723A70D00F9A5AD /* CoreGraphics.framework in Frameworks */,
 				50E946F51745E4D100E0E519 /* MessageUI.framework in Frameworks */,
@@ -267,9 +276,6 @@
 		501B04461723A70D00F9A5AD = {
 			isa = PBXGroup;
 			children = (
-				50E946F61745E4E800E0E519 /* AdSupport.framework */,
-				50E946F41745E4D100E0E519 /* MessageUI.framework */,
-				50E946F21745E4C200E0E519 /* StoreKit.framework */,
 				50944F9717306DD70091E08E /* Default-568h@2x.png */,
 				50944F9517306CD70091E08E /* icon@2x.png */,
 				50944F9317306CD10091E08E /* icon.png */,
@@ -298,6 +304,10 @@
 		501B04511723A70D00F9A5AD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				50C2CDE5175400890073698B /* AVFoundation.framework */,
+				50E946F61745E4E800E0E519 /* AdSupport.framework */,
+				50E946F41745E4D100E0E519 /* MessageUI.framework */,
+				50E946F21745E4C200E0E519 /* StoreKit.framework */,
 				5016B2A817246FB200A83CD8 /* QuartzCore.framework */,
 				5016B2A6172461E400A83CD8 /* AssetsLibrary.framework */,
 				5090196C1723C1BA00902DEB /* AudioToolbox.framework */,
@@ -328,6 +338,7 @@
 		501B04591723A70D00F9A5AD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				50C2CDDE1754005B0073698B /* sounds */,
 				50944F4617306AC40091E08E /* images */,
 				509019721723C62000902DEB /* JSONParser */,
 				501B045A1723A70D00F9A5AD /* HappyEggs-Info.plist */,
@@ -513,6 +524,16 @@
 			path = splash;
 			sourceTree = "<group>";
 		};
+		50C2CDDE1754005B0073698B /* sounds */ = {
+			isa = PBXGroup;
+			children = (
+				50C2CDDF1754005B0073698B /* sound_1.mp3 */,
+				50C2CDE01754005B0073698B /* sound_2.mp3 */,
+				50C2CDE11754005B0073698B /* sound_3.mp3 */,
+			);
+			path = sounds;
+			sourceTree = SOURCE_ROOT;
+		};
 		50E946571745E1AA00E0E519 /* GoogleAd */ = {
 			isa = PBXGroup;
 			children = (
@@ -666,6 +687,9 @@
 				50944FAE1730A0DE0091E08E /* splash_background_5@2x.png in Resources */,
 				50E946EE1745E1AB00E0E519 /* README.txt in Resources */,
 				50C2CDDD1753FD1C0073698B /* addImage.jpg in Resources */,
+				50C2CDE21754005B0073698B /* sound_1.mp3 in Resources */,
+				50C2CDE31754005B0073698B /* sound_2.mp3 in Resources */,
+				50C2CDE41754005B0073698B /* sound_3.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

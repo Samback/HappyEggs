@@ -7,6 +7,7 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
+#import <AVFoundation/AVFoundation.h>
 #import "HEggHomePageVC.h"
 #import "Egg.h"
 #import "HEggCell.h"
@@ -23,7 +24,8 @@
 
 #define SCALED_TIMES 2.0
 
-@interface HEggHomePageVC ()<NSFetchedResultsControllerDelegate, FDTakeDelegate, UIAlertViewDelegate>
+@interface HEggHomePageVC ()<NSFetchedResultsControllerDelegate, FDTakeDelegate, UIAlertViewDelegate, AVAudioPlayerDelegate>
+@property (nonatomic, strong)   AVAudioPlayer *audioPlayer;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (weak, nonatomic) IBOutlet UICollectionView *eggsList;
 @property (nonatomic, strong) REActivityViewController *activityViewController;
@@ -42,10 +44,22 @@
 
 @property (nonatomic, strong) NSArray *scratchArray;
 @property (nonatomic, strong) GADBannerView *mobileBanner;
+@property (nonatomic, strong) NSArray *soundsList;
 @end
 
 @implementation HEggHomePageVC
 #pragma mark - Lazy instantiation
+
+
+- (NSArray *)soundsList
+{
+    if (!_soundsList) {
+        _soundsList = @[@"sound_1",
+                        @"sound_2",
+                        @"sound_3"];
+    }
+    return _soundsList;
+}
 
 - (NSArray *)scratchArray
 {
@@ -440,6 +454,7 @@
         [alert show];
         dispatch_async(dispatch_get_main_queue(), ^{
             self.activeToFight = NO;
+            [self playScratch];
         });
 
         
@@ -533,5 +548,30 @@
     [self.mobileBanner loadRequest:[GADRequest request]];
 }
 
+
+#pragma mark - Play Scratch
+
+- (void)playScratch
+{
+    int rand =  arc4random()%(self.soundsList.count - 1);
+    NSString *sound = self.soundsList[rand];
+    NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle]
+                                         pathForResource:sound
+                                         ofType:@"mp3"]];
+    
+    NSError *error;
+    self.audioPlayer = [[AVAudioPlayer alloc]
+                   initWithContentsOfURL:url
+                   error:&error];
+    if (error)
+    {
+        NSLog(@"Error in audioPlayer: %@",
+              [error localizedDescription]);
+    } else {
+        self.audioPlayer.delegate = self;
+        [self.audioPlayer prepareToPlay];
+        [self.audioPlayer play];
+    }
+}
 
 @end
