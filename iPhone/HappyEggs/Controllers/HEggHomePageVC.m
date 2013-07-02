@@ -84,7 +84,7 @@
 
 
 - (REActivityViewController *)activityViewController{
-//    if (!_activityViewController) {
+    if (!_activityViewController) {
         REFacebookActivity *facebookActivity = [[REFacebookActivity alloc] init];
         RETwitterActivity *twitterActivity = [[RETwitterActivity alloc] init];
         REVKActivity *vkActivity = [[REVKActivity alloc] initWithClientId:VK_APP_ID];
@@ -96,18 +96,19 @@
         // Create REActivityViewController controller and assign data source
         //
         REActivityViewController *activityViewController = [[REActivityViewController alloc] initWithViewController:self activities:activities];
-        UIGraphicsBeginImageContext(self.view.bounds.size);
-        [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
-        UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();             UIGraphicsEndImageContext();
-        UIGraphicsEndImageContext();
-        activityViewController.userInfo = @{
-                                            @"image": viewImage,
-                                            @"text": SHARING_TEXT,
-                                            @"url": [NSURL URLWithString:SHARING_URL_FOR_APP],
-                                            };
-
+        
         _activityViewController = activityViewController;
-//    }
+    }
+    UIGraphicsBeginImageContext(self.view.bounds.size);
+    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();             UIGraphicsEndImageContext();
+    UIGraphicsEndImageContext();
+    _activityViewController.userInfo = @{
+                                        @"image": viewImage,
+                                        @"text": SHARING_TEXT,
+                                        @"url": [NSURL URLWithString:SHARING_URL_FOR_APP],
+                                        };
+    
     return _activityViewController;
 }
 
@@ -134,7 +135,7 @@
                                                        @"There are no sources available to select a photo");
     NSLog(@"%@", str);
     self.eggOnScreen = [self.fetchedResultsController fetchedObjects][1];
-
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -162,9 +163,9 @@
         [self.fetchedResultsController performFetch:&error];
         
         NSLog(@"Selected %d photos",[self.fetchedResultsController fetchedObjects].count);
-        NSAssert(!error, @"Error performing fetch request: %@", error);        
-    }    
-    return _fetchedResultsController;    
+        NSAssert(!error, @"Error performing fetch request: %@", error);
+    }
+    return _fetchedResultsController;
 }
 
 
@@ -191,7 +192,7 @@
     cell.layer.masksToBounds = YES;
     NSLog(@"Egg background %@", egg.background);
     UIImage *reScaled = [UIImage imageWithCGImage:[HEggHelperMethods imageForEgg:egg].CGImage scale:SCALED_TIMES orientation:egg.orientationValue];
-   // UIImage* cropped = [ reScaled cropToSize:CGSizeMake(80, 120) usingMode:NYXCropModeCenter];
+    // UIImage* cropped = [ reScaled cropToSize:CGSizeMake(80, 120) usingMode:NYXCropModeCenter];
     cell.eggImage.image = reScaled;
     return cell;
 }
@@ -219,12 +220,12 @@
 
 - (void)takeController:(FDTakeController *)controller didCancelAfterAttempting:(BOOL)madeAttempt
 {
-//    UIAlertView *alertView;
-//    if (madeAttempt)
-//        alertView = [[UIAlertView alloc] initWithTitle:@"Example app" message:@"The take was cancelled after selecting media" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-//    else
-//        alertView = [[UIAlertView alloc] initWithTitle:@"Example app" message:@"The take was cancelled without selecting media" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-//    [alertView show];
+    //    UIAlertView *alertView;
+    //    if (madeAttempt)
+    //        alertView = [[UIAlertView alloc] initWithTitle:@"Example app" message:@"The take was cancelled after selecting media" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    //    else
+    //        alertView = [[UIAlertView alloc] initWithTitle:@"Example app" message:@"The take was cancelled without selecting media" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    //    [alertView show];
 }
 
 - (void)takeController:(FDTakeController *)controller gotPhoto:(UIImage *)photo withInfo:(NSDictionary *)info
@@ -235,7 +236,7 @@
         NSManagedObjectContext *context = [RKManagedObjectStore defaultStore].mainQueueManagedObjectContext;
         NSInteger eggId = self.numberOfUniqeEggs;
         [Egg addEggWithName:[NSString stringWithFormat:@"Image name %d", eggId] background:path couldDelete:YES eggId:eggId type:USER_EGG_TYPE orientation:photo.imageOrientation andContext:context];
-    }   
+    }
 }
 
 - (NSString *)saveImage:(UIImage*)image withName:(NSString *)name
@@ -283,7 +284,7 @@
         self.deleteEggAlert = [[UIAlertView alloc] initWithTitle:APP_NAME message:DELETE_EGG_MESSAGE delegate:self cancelButtonTitle:NO_MESSAGE otherButtonTitles:YES_MESSAGE, nil];
         self.selectedEgg = egg;
         [self.deleteEggAlert show];
-    }    
+    }
 }
 
 
@@ -300,14 +301,14 @@
     [[RKObjectManager sharedManager].managedObjectStore.mainQueueManagedObjectContext saveToPersistentStore:&error];
     if (error) {
         NSLog(@"Some problems on saving at favorites");
-    }    
+    }
     self.selectedEgg = nil;
     self.deleteEggAlert = nil;
     [self chooseNewSkinForEgg: self.eggOnScreen];
 }
 
 - (IBAction)longPressForDelete:(UILongPressGestureRecognizer *)sender {
-    CGPoint location = [sender locationInView:self.eggsList]; 
+    CGPoint location = [sender locationInView:self.eggsList];
     [self deleteEggAtIndex: [self.eggsList indexPathForItemAtPoint:location]];
 }
 
@@ -329,7 +330,7 @@
 
 - (void)stopJigglingOnCollection
 {
-[self.eggsList.visibleCells makeObjectsPerformSelector:@selector(stopJiggling)];
+    [self.eggsList.visibleCells makeObjectsPerformSelector:@selector(stopJiggling)];
 }
 
 
@@ -394,28 +395,28 @@
 
 
 - (void)sendBumpData
-{  
+{
     
     [[BumpClient sharedClient] setChannelConfirmedBlock:^(BumpChannelID channel) {
-            NSLog(@"active to fight %d", self.activeToFight);
-            if (self.activeToFight) {
-                NSLog(@"Channel with %@ confirmed.", [[BumpClient sharedClient] userIDForChannel:channel]);
-                self.userAttack = arc4random() % 100;
-                NSDictionary *dictionary = @{
-                                             @"attack":[NSString stringWithFormat:@"%d", self.userAttack],
-                                             };
-                
-                NSError *error ;
-                
-                
-                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary options:NSJSONWritingPrettyPrinted error:&error];
-                if (!error) {
-                    [[BumpClient sharedClient] sendData:jsonData
-                                              toChannel:channel];
-                    
-                }
+        NSLog(@"active to fight %d", self.activeToFight);
+        if (self.activeToFight) {
+            NSLog(@"Channel with %@ confirmed.", [[BumpClient sharedClient] userIDForChannel:channel]);
+            self.userAttack = arc4random() % 100;
+            NSDictionary *dictionary = @{
+                                         @"attack":[NSString stringWithFormat:@"%d", self.userAttack],
+                                         };
+            
+            NSError *error ;
+            
+            
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary options:NSJSONWritingPrettyPrinted error:&error];
+            if (!error) {
+                [[BumpClient sharedClient] sendData:jsonData
+                                          toChannel:channel];
                 
             }
+            
+        }
     }];
     
 }
@@ -456,7 +457,7 @@
             self.activeToFight = NO;
             [self playScratch];
         });
-
+        
         
         int numberOfElements = self.scratchArray.count;
         int position = arc4random() % numberOfElements;
@@ -515,7 +516,7 @@
                                      @"platform" : @"ios"
                                      };
     NSMutableURLRequest *request = [httpClient multipartFormRequestWithMethod:@"POST" path:nil parameters:postParameters constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
-     }];
+    }];
     AFJSONRequestOperation *operation =
     [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                     success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
@@ -524,12 +525,12 @@
                                                     failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
                                                         NSLog(@"Request Error [%@] JSon =   %@", [error localizedDescription],(NSDictionary *)JSON);
                                                     }];
-        [operation start];
+    [operation start];
 }
 
 
 
-#pragma mark - Google Ad 
+#pragma mark - Google Ad
 - (void)addBannerScreen
 {
     // Create a view of the standard size at the top of the screen.
@@ -561,8 +562,8 @@
     
     NSError *error;
     self.audioPlayer = [[AVAudioPlayer alloc]
-                   initWithContentsOfURL:url
-                   error:&error];
+                        initWithContentsOfURL:url
+                        error:&error];
     if (error)
     {
         NSLog(@"Error in audioPlayer: %@",
