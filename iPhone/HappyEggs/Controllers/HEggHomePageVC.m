@@ -123,6 +123,8 @@
     [self configureBump];
     self.trackedViewName = @"Home page";
     
+   
+    
     self.takeController = [[FDTakeController alloc] init];
     self.takeController.delegate = self;
     
@@ -142,12 +144,26 @@
 {
     [super viewWillAppear:animated];
     [self chooseNewSkinForEgg:self.eggOnScreen];
+   
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     [self.eggsList scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:SHRT_MAX/2 inSection:0] atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
+    
+    id tracker = [GAI sharedInstance].defaultTracker;
+    
+    // Increment the metric at index 1.
+    BOOL metric = [tracker setCustom:1
+                metric:[NSNumber numberWithLongLong:30]];
+    
+   BOOL dimension =  [tracker setCustom:1
+             dimension:@"myValue"];  // Set the custom dimension value.
+    NSLog(@"Metric = %d  dimension =%d", metric, dimension);
+    
+    // Metric value sent with this hit.
+    [tracker sendView: self.trackedViewName];
 }
 
 - (NSFetchedResultsController *)fetchedResultsController{

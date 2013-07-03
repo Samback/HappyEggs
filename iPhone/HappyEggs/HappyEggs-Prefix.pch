@@ -12,7 +12,7 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
-    #import <RestKit/RestKit.h>
+    #import <Restkit/Restkit.h>
     #import "HEggDefentitions.h"
     #import "BumpClient.h"
     #import <REActivityViewController/REActivityViewController.h>
